@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:notary_ping_notary/src/modules/dashboard/profile/Profile.dart';
-import 'package:notary_ping_notary/src/modules/dashboard/search/search.dart';
+// ignore_for_file: file_names
 
-import '../../../styles.dart';
-import 'chat/chart.dart';
-import 'home/Home.dart';
+import 'package:notary_ping_notary/src/modules/dashboard/bookings/Bookings.dart';
+import 'package:notary_ping_notary/src/modules/dashboard/home/Home.dart';
+import 'package:notary_ping_notary/src/modules/dashboard/message/Message.dart';
+import 'package:notary_ping_notary/src/modules/dashboard/profile/Profile.dart';
+
+import '../../../index.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
@@ -17,102 +17,87 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int currentIndex = 3; // Set the initial index to 0
-  late final PageController? pageController;
-
-  @override
-  void initState() {
-    pageController = PageController(
-      initialPage: currentIndex,
-    );
-    super.initState();
-  }
+  int currentIndex = 0;
+  final PageController pageController = PageController(initialPage: 0);
+  // @override
+  // void initState() {
+  //   pageController = PageController(
+  //     initialPage: currentIndex,
+  //   );
+  //   super.initState();
+  // }
 
   @override
   void dispose() {
-    pageController?.dispose();
+    pageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.light,
-    ));
-
     return Scaffold(
-      // backgroundColor: Colors.transparent,
-      //extendBody: true,
-      body: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        onPageChanged: (page) {
-          setState(() {
-            currentIndex = page;
-          });
-        },
-        children: const [
-          HomeScreen(),
-          SearchScreen(),
-          Chats(),
-          Profile(),
-        ],
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 15, right: 20, left: 20),
-        child: Container(
-          height: 66,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildNavItem(0, "Home", "assets/icon/home.png"),
-              _buildNavItem(1, "Search", "assets/icon/search.png"),
-              _buildNavItem(2, "Messages", "assets/icon/messages.png"),
-              _buildNavItem(3, "Profile", "assets/icon/profile.png"),
-            ],
-          ),
+        extendBody: true,
+        body: PageView(
+          controller: pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (page) {
+            setState(() {
+              currentIndex = page;
+            });
+          },
+          children: [
+            const Home(),
+            const Bookings(),
+            const Message(),
+            Profile(),
+          ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(int index, String label, String iconPath) {
-    return GestureDetector(
-      onTap: () {
-        currentIndex = index;
-        pageController?.jumpToPage(index);
-        setState(() {});
-      },
-      child: SizedBox(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ImageIcon(
-                AssetImage(iconPath),
-                size: 20,
-                color:
-                    currentIndex == index ? Palette.primaryColor : Colors.grey,
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: (index) {
+            currentIndex = index;
+            pageController.jumpToPage(index);
+            setState(() {});
+          },
+          backgroundColor: Palette.whiteColor,
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          selectedItemColor: Palette.primaryColor,
+          unselectedItemColor: Palette.greyTextColor,
+          selectedLabelStyle:
+              TextStyles.bodySmall.copyWith(color: Palette.primaryColor),
+          unselectedLabelStyle: TextStyles.bodySmall,
+          items: [
+            BottomNavigationBarItem(
+              icon: const ImageIcon(
+                AssetImage(homeIcon),
+                size: 24,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 3.5),
-                child: Text(
-                  label,
-                  style: TextStyles.bottomBarText.copyWith(
-                      color: currentIndex == index
-                          ? Palette.primaryColor
-                          : Colors.grey),
-                ),
+              label: 'Home'.tr,
+            ),
+            BottomNavigationBarItem(
+              icon: const ImageIcon(
+                AssetImage(bookingsIcon),
+                size: 24,
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+              label: 'Bookings'.tr,
+            ),
+            BottomNavigationBarItem(
+              icon: const ImageIcon(
+                AssetImage(messageIcon),
+                size: 24,
+              ),
+              label: 'Message'.tr,
+            ),
+            BottomNavigationBarItem(
+              icon: const ImageIcon(
+                AssetImage(userIcon),
+                size: 24,
+              ),
+              label: 'Profile'.tr,
+            ),
+          ],
+        ));
   }
 }

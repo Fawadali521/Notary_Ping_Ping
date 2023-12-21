@@ -1,84 +1,62 @@
+// ignore_for_file: file_names
 
+import 'package:notary_ping_notary/src/constant/time_formate.dart';
 
-import 'package:flutter/material.dart';
- import 'package:flutter/services.dart';
-
-import '../../../../styles.dart';
+import '../../../../index.dart';
 
 class TermAndCondition extends StatelessWidget {
   const TermAndCondition({Key? key}) : super(key: key);
 
-
-
-
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.black,
-      statusBarBrightness: Brightness.light,
-    ));
-    final height = MediaQuery.sizeOf(context).height;
-    final width = MediaQuery.sizeOf(context).width;
-
-    return   Scaffold(
-
-      appBar: AppBar(
-        centerTitle: true,
-        iconTheme: const  IconThemeData(
-          color: Colors.white
-        ),
-        backgroundColor: Palette.secondaryColor,
-
-        title: Text('Term and condition', style: TextStyles().appBarTitleWhite,),
+    return Scaffold(
+      backgroundColor: Palette.whiteColor,
+      appBar: CustomAppBar(
+        color: Palette.whiteColor,
+        title: 'Terms and conditions'.tr,
+        isBack: true,
       ),
       body: ListView(
-        padding: const  EdgeInsets.only(
-          top: 20,
-          left: 15,
-          right: 15
-
-        ),
+        shrinkWrap: true,
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
         children: [
-          
-          Padding(
-            padding: const EdgeInsets.only(
-              bottom: 20
-            ),
-            child: Image.asset('assets/images/terms.png',
-            height: height * 0.3,),
-          ),
-
-          const Text("Term and condition " , style: TextStyles.normalHeading,),
-
-           // Html(
-           //   data: '<a href="https://eezly.com/terms/">Terms of Service</a>',
-           //
-           //
-           //  ),
-
-          Wrap(
+          Row(
             children: [
-              Text("Our notary services"
-              " are designed to ensure the authenticity "
-              "and legality of your documents while upholding "
-    "the highest standards of professionalism and ethical conduct. "
-    "Our notary,, will carefully verify your identity"
-    "and authenticate your signature in accordance with applicable"
-    " laws and regulations. It is essential to understand the content of "
-    "your documents before presenting them for notarization, "
-    "as we do not provide legal advice. We maintain the strictest"
-    " confidentiality regarding your"
-                  " information, and our  are committed to delivering reliable and accurate notarial services",
-
-
-
-                style: TextStyles().privacyBLack,
-
+              Image.asset(
+                conditionIcon,
+                fit: BoxFit.contain,
+                height: 60,
+                width: 60,
+              ),
+              const SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Terms and conditions".tr,
+                    style: TextStyles.headlineSmall.copyWith(
+                      color: Palette.primaryColor,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text("${"Update".tr}${date.format(DateTime.now())}",
+                      style: TextStyles.bodyMedium),
+                ],
               )
-
             ],
           ),
-
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10, top: 24),
+            child: Text(
+              "Terms and conditions".tr,
+              style: TextStyles.titleLarge,
+            ),
+          ),
+          Text(
+            "15.2 Your privacy is important to us. To better protect your privacy, we are providing this notice explaining our policy with regards to the information you share with us. This privacy policy relates to the information we collect, online from Application, received through the email, by fax or telephone, or in person or in any other way and retain and use for the purpose of providing you services. If you do not agree to the terms in this Policy, we kindly ask you not to use these portals and/or sign the contract document."
+                .tr,
+            style: TextStyles.bodyMedium,
+          ),
         ],
       ),
     );
