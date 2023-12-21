@@ -125,6 +125,8 @@ class Languages extends Translations {
           'Choose the right plan for you': 'Choose the right plan for you',
           'Unlock premium features with our monthly subscription':
               'Unlock premium features with our monthly subscription',
+          'Add notary documents': 'Add notary documents',
+          'Add driving license': 'Add driving license',
           '': '',
         },
       };

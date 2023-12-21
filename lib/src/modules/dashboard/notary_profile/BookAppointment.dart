@@ -1,7 +1,6 @@
 // ignore_for_file: file_names,
 
 import 'package:notary_ping_notary/src/modules/dashboard/DashboardScreen.dart';
-import 'package:notary_ping_notary/src/modules/dashboard/bookings/Tracking.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/notary_profile/utility/CustomDateTime.dart';
 import 'package:notary_ping_notary/src/states/profile/ProfileController.dart';
 
@@ -488,9 +487,10 @@ class _BookAppointmentState extends State<BookAppointment> {
         );
       },
     ).then((value) => {
-          isTrackingScreen
-              ? Get.off(() => const Tracking())
-              : Get.offAll(() => const Dashboard()),
+          // isTrackingScreen
+          //     ? Get.off(() => const Tracking())
+          // :
+          Get.offAll(() => const Dashboard()),
         });
   }
 }

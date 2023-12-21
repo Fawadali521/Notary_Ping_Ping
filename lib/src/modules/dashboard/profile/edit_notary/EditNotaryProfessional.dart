@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/edit_notary/EditNotaryServices.dart';
 import 'package:notary_ping_notary/src/states/profile/ProfileController.dart';
 
@@ -287,12 +288,55 @@ class EditNotaryProfessional extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16.h),
-          SizedBox(height: 80.h),
+          Text(
+            "Add notary documents".tr,
+            style: TextStyles.titleLarge,
+          ),
+          SizedBox(height: 12.h),
+          DottedBorder(
+            dashPattern: const [9, 3],
+            padding: EdgeInsets.symmetric(vertical: 24.h),
+            borderType: BorderType.RRect,
+            color: Palette.greenColor,
+            radius: const Radius.circular(16),
+            child: SizedBox(
+              width: double.infinity,
+              child: Center(
+                  child: Image.asset(
+                uploadDocumentIcon,
+                height: 70,
+                width: 70,
+              )),
+            ),
+          ),
+          SizedBox(height: 16.h),
+          Text(
+            "Add driving license".tr,
+            style: TextStyles.titleLarge,
+          ),
+          SizedBox(height: 12.h),
+          DottedBorder(
+            dashPattern: const [9, 3],
+            padding: EdgeInsets.symmetric(vertical: 24.h),
+            borderType: BorderType.RRect,
+            color: Palette.greenColor,
+            radius: const Radius.circular(16),
+            child: SizedBox(
+              width: double.infinity,
+              child: Center(
+                  child: Image.asset(
+                uploadDocumentIcon,
+                height: 70,
+                width: 70,
+              )),
+            ),
+          ),
+          SizedBox(height: 24.h),
           SubmitButton(
             title: 'Continue'.tr,
             onTap: () => Get.to(() => const EditNotaryServices()),
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 24.h),
         ],
       ),
     );

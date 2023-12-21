@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:notary_ping_notary/src/modules/dashboard/bookings/Tracking.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/bookings/utility/CustomBookingButon.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/bookings/utility/CustomBookingItem.dart';
 
@@ -124,32 +123,247 @@ class _BookingsState extends State<Bookings> {
                 });
               },
               children: [
+                ///new
                 ListView.builder(
                   itemCount: userNamesList.length,
                   itemBuilder: (context, index) {
-                    return CustomBookingItem(
-                      imgUrl: userImages[index],
-                      name: userNamesList[index],
-                      date: 'June 10,2023',
-                      time: '10:30 AM',
-                      bookingStatus: "New",
-                      onTap: () => Get.to(() => const Tracking()),
+                    return Container(
+                      margin:
+                          EdgeInsets.symmetric(vertical: 6.h, horizontal: 20.w),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 12.h, horizontal: 12.w),
+                      decoration: BoxDecoration(
+                        color: Palette.whiteColor,
+                        borderRadius: BorderStyles.normal,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      userImages[index],
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 12.w),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    userNamesList[index],
+                                    style: TextStyles.titleMedium,
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 4.h),
+                                    child: const Text(
+                                      'June 10,2023',
+                                      style: TextStyles.bodySmall,
+                                    ),
+                                  ),
+                                  const Text(
+                                    '10:30 AM',
+                                    style: TextStyles.bodySmall,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 12.h),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.h, horizontal: 16.w),
+                            decoration: BoxDecoration(
+                              color: Palette.bgTextFeildColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              "Signature for property documents".tr,
+                              style: TextStyles.bodyLarge.copyWith(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Palette.whiteColor,
+                                    border: Border.all(
+                                      color: Palette.primaryColor,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "Decline".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyles.titleMedium.copyWith(
+                                      color: Palette.primaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 16.w),
+                              Expanded(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                                  decoration: BoxDecoration(
+                                    color: Palette.primaryColor,
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(
+                                      color: Palette.primaryColor,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "Accept".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyles.titleMedium.copyWith(
+                                      color: Palette.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     );
                   },
                 ),
+
+                /// currents booking
                 ListView.builder(
                   itemCount: userNamesList.length,
                   itemBuilder: (context, index) {
-                    return CustomBookingItem(
-                      imgUrl: userImages[index],
-                      name: userNamesList[index],
-                      date: 'June 10,2023',
-                      time: '10:30 AM',
-                      bookingStatus: "Tacking",
-                      onTap: () => Get.to(() => const Tracking()),
+                    return Container(
+                      margin:
+                          EdgeInsets.symmetric(vertical: 6.h, horizontal: 20.w),
+                      padding: EdgeInsets.symmetric(
+                          vertical: 12.h, horizontal: 12.w),
+                      decoration: BoxDecoration(
+                        color: Palette.whiteColor,
+                        borderRadius: BorderStyles.normal,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      userImages[index],
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 12.w),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    userNamesList[index],
+                                    style: TextStyles.titleMedium,
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 4.h),
+                                    child: const Text(
+                                      'June 10,2023',
+                                      style: TextStyles.bodySmall,
+                                    ),
+                                  ),
+                                  const Text(
+                                    '10:30 AM',
+                                    style: TextStyles.bodySmall,
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 12.h),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10.h, horizontal: 16.w),
+                            decoration: BoxDecoration(
+                              color: Palette.bgTextFeildColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              "Signature for property documents".tr,
+                              style: TextStyles.bodyLarge.copyWith(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    color: Palette.whiteColor,
+                                    border: Border.all(
+                                      color: Palette.primaryColor,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "Start journey".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyles.titleMedium.copyWith(
+                                      color: Palette.primaryColor,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 16.w),
+                              Expanded(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                                  decoration: BoxDecoration(
+                                    color: Palette.primaryColor,
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(
+                                      color: Palette.primaryColor,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "Send message".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyles.titleMedium.copyWith(
+                                      color: Palette.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     );
                   },
                 ),
+
+                ///history
                 ListView.builder(
                   itemCount: userNamesList.length,
                   itemBuilder: (context, index) {
