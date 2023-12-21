@@ -13,7 +13,6 @@ import 'package:notary_ping_notary/src/modules/dashboard/bookings/utility/Custom
 import 'package:notary_ping_notary/src/modules/dashboard/bookings/utility/TrackingItem.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/bookings/utility/WdigetToMarker.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/message/Chat.dart';
-import 'package:notary_ping_notary/src/utility/SubmitButton.dart';
 import 'package:notary_ping_notary/src/utility/maps_utility/MarkerImage.dart';
 import 'package:permission_handler/permission_handler.dart';
 

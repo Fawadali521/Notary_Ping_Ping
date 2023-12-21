@@ -45,7 +45,7 @@ class SignUpController extends GetxController {
     return null;
   }
 
-  changeSelectGender(String value) {
+  changeSelectCountryCode(String value) {
     state.countryCodee.value = value;
   }
 }

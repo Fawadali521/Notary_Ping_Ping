@@ -11,5 +11,6 @@ export 'package:notary_ping_notary/src/utility/CustomAppBar.dart';
 export 'package:notary_ping_notary/src/utility/CustomTextField.dart';
 export 'package:notary_ping_notary/src/utility/LoadingState.dart';
 export 'package:notary_ping_notary/src/utility/SnackBarToast.dart';
+export 'package:notary_ping_notary/src/utility/SubmitButton.dart';
 export 'package:notary_ping_notary/styles.dart';
 export 'package:shimmer/shimmer.dart';

@@ -94,4 +94,5 @@ class Palette {
   static const Color dotColor = Color(0xFFCFEFFC);
   static const Color languageBorderColor = Color(0xFFE9F1FF);
   static const Color rportNotryProfileColor = Color(0xFFE7F7FD);
+  static const Color subscriptionCardColor = Color(0xFF0C738A);
 }

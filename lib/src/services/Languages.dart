@@ -114,6 +114,17 @@ class Languages extends Translations {
           'Report type': 'Report type',
           'Description': 'Description',
           'Submit report': 'Submit report',
+          'New': 'New',
+          'Edit notary profile': 'Edit notary profile',
+          'Edit Notary Profile': 'Edit Notary Profile',
+          'Contact information': 'Contact information',
+          'Work email': 'Work email',
+          'Availability': 'Availability',
+          'My subscription': 'My subscription',
+          'Get Started Today': 'Get Started Today',
+          'Choose the right plan for you': 'Choose the right plan for you',
+          'Unlock premium features with our monthly subscription':
+              'Unlock premium features with our monthly subscription',
           '': '',
         },
       };

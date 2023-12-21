@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/utility/CustomLanguageItem.dart';
 import 'package:notary_ping_notary/src/states/profile/ProfileController.dart';
 import 'package:notary_ping_notary/src/utility/CustomDivider.dart';
-import 'package:notary_ping_notary/src/utility/SubmitButton.dart';
 
 import '../../../../index.dart';
 
@@ -33,9 +32,7 @@ class _AppSettingState extends State<AppSetting> {
             () => ListView(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -58,6 +55,36 @@ class _AppSettingState extends State<AppSetting> {
                       onChanged: (value) {
                         controller.state.isNotification.value =
                             !controller.state.isNotification.value;
+                      },
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  child: const CustomDivider(),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Availability".tr,
+                          style: TextStyles.titleSmall,
+                        ),
+                        Text(
+                          "Only show online will be disable!".tr,
+                          style: TextStyles.bodySmall,
+                        ),
+                      ],
+                    ),
+                    CupertinoSwitch(
+                      activeColor: Palette.primaryColor,
+                      value: controller.state.isAvailability.value,
+                      onChanged: (value) {
+                        controller.state.isAvailability.value =
+                            !controller.state.isAvailability.value;
                       },
                     ),
                   ],

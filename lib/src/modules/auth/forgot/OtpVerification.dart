@@ -3,7 +3,6 @@
 import 'package:notary_ping_notary/src/modules/auth/forgot/ForgotPassword.dart';
 import 'package:notary_ping_notary/src/modules/auth/forgot/ResetPassword.dart';
 import 'package:notary_ping_notary/src/modules/auth/signin/SignIn.dart';
-import 'package:notary_ping_notary/src/utility/SubmitButton.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../../index.dart';

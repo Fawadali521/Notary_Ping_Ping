@@ -17,7 +17,8 @@ class CustomBookingButon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return 
+    GestureDetector(
       onTap: onTap,
       child: Container(
         height: 35.h,

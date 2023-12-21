@@ -7,7 +7,7 @@ class CustomBookingItem extends StatelessWidget {
   final String name;
   final String date;
   final String time;
-  final bool isHistory;
+  final String bookingStatus;
   final VoidCallback onTap;
 
   const CustomBookingItem({
@@ -16,7 +16,7 @@ class CustomBookingItem extends StatelessWidget {
     required this.name,
     required this.date,
     required this.time,
-    this.isHistory = false,
+    required this.bookingStatus,
     required this.onTap,
   });
 
@@ -98,7 +98,11 @@ class CustomBookingItem extends StatelessWidget {
                 borderRadius: BorderStyles.thin,
               ),
               child: Text(
-                isHistory ? "View".tr : "Tracking".tr,
+                bookingStatus == "New"
+                    ? "New".tr
+                    : bookingStatus == "View"
+                        ? "View".tr
+                        : "Tracking".tr,
                 style: TextStyles.bodyLarge.copyWith(
                   color: Palette.primaryColor,
                 ),

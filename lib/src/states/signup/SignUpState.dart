@@ -17,8 +17,45 @@ class SignUpState extends LoadingState {
   set confirmPassword(value) => _confirmPassword.value = value;
   TextEditingController countryCode = TextEditingController();
   final RxString countryCodee = '+33'.obs;
+  final RxString slectedCity = ''.obs;
 
   ///dummy data
+  final RxList<String> selecteCity = [
+    'Peshawar',
+    'Islamabad',
+    'Lahore',
+    'Karachi',
+    'Quetta',
+    'Multan',
+    'Faisalabad',
+    'Rawalpindi',
+    'Sialkot',
+    'Kalkata',
+    'Mumbai',
+    'Delhi',
+    'Chennai',
+    'Bangalore',
+    'Hyderabad',
+    'Ahmedabad',
+    'Pune',
+    'Surat',
+    'Jaipur',
+    'Kanpur',
+    'Lucknow',
+    'Nagpur',
+    'Patna',
+    'Indore',
+    'Thane',
+    'Bhopal',
+    'Visakhapatnam',
+    'Vadodara',
+    'Firozabad',
+    'Ludhiana',
+    'Rajkot',
+    'Agra',
+    'Siliguri',
+    'Nashik',
+  ].obs;
 
   final RxList<String> slectCountryCode = {
     '+33',

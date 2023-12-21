@@ -1,11 +1,13 @@
 // ignore_for_file: file_names
 
+import 'package:notary_ping_notary/src/modules/dashboard/profile/edit_notary/EditNotaryProfessional.dart';
 import 'package:notary_ping_notary/src/states/profile/ProfileController.dart';
+import 'package:notary_ping_notary/src/utility/CustomDropDown.dart';
 
-import '../../../../index.dart';
+import '../../../../../index.dart';
 
-class EditProfile extends StatelessWidget {
-  EditProfile({super.key});
+class EditNotaryContact extends StatelessWidget {
+  EditNotaryContact({super.key});
   final ProfileController controller = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
@@ -13,63 +15,58 @@ class EditProfile extends StatelessWidget {
       backgroundColor: Palette.whiteColor,
       appBar: CustomAppBar(
         color: Palette.whiteColor,
-        title: 'Edit Profile'.tr,
+        title: 'Edit Notary Profile'.tr,
         isBack: true,
       ),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: SizedBox(
-              height: 70,
-              width: 70,
-              child: Center(
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Image.asset(
-                          user,
-                          fit: BoxFit.fill,
-                          height: 70,
-                          width: 70,
-                        ),
-                      ),
-                    ),
-                    const Positioned(
-                      right: 0,
-                      child: CircleAvatar(
-                        backgroundColor: Palette.primaryColor,
-                        radius: 10,
-                        child: Icon(
-                          Icons.camera_alt_outlined,
-                          color: Palette.whiteColor,
-                          size: 12,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 12.h),
           Text(
-            "Mansurul Hoque".tr,
-            style: TextStyles.headlineSmall,
-            textAlign: TextAlign.center,
+            "Contact information".tr,
+            style: TextStyles.titleLarge,
           ),
           SizedBox(height: 12.h),
           CustomTextField(
-            hintText: 'Enter your name'.tr,
+            hintText: 'Work email'.tr,
+            onChange: (value) {},
+            prefixIcon: emailIcon,
+          ),
+          SizedBox(height: 16.h),
+          Row(
+            children: [
+              Obx(
+                () => CustomDropDown(
+                  textStyle: TextStyles.bodyMedium.copyWith(
+                    color: Palette.blackColor,
+                  ),
+                  items: controller.state.slectCountryCode,
+                  selectedVal: controller.state.countryCodee.value,
+                  onChanged: (val) {
+                    controller.changeSelectCountryCode(val!);
+                  },
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Expanded(
+                flex: 5,
+                child: CustomTextField(
+                  hintText: 'Phone number'.tr,
+                  onChange: (value) {
+                    // controller.state.confirmPassword = value;
+                  },
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 16.h),
+          CustomTextField(
+            hintText: 'Suite or floor'.tr,
             onChange: (value) {
               // controller.state.name = value;
             },
-            prefixIcon: userIcon,
+            prefixIcon: suiteIcon,
           ),
           SizedBox(height: 16.h),
           TextFormField(
@@ -200,8 +197,8 @@ class EditProfile extends StatelessWidget {
           ),
           SizedBox(height: 80.h),
           SubmitButton(
-            title: 'Update'.tr,
-            onTap: () {},
+            title: 'Continue'.tr,
+            onTap: () => Get.to(() => EditNotaryProfessional()),
           ),
           SizedBox(height: 20.h),
         ],

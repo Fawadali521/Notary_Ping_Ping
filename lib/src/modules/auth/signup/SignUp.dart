@@ -7,7 +7,6 @@ import 'package:notary_ping_notary/src/states/signup/SignUpController.dart';
 import 'package:notary_ping_notary/src/utility/CustomDivider.dart';
 import 'package:notary_ping_notary/src/utility/CustomDropDown.dart';
 import 'package:notary_ping_notary/src/utility/SocialButton.dart';
-import 'package:notary_ping_notary/src/utility/SubmitButton.dart';
 
 import '../../../../index.dart';
 
@@ -71,7 +70,7 @@ class SignUp extends StatelessWidget {
                   items: controller.state.slectCountryCode,
                   selectedVal: controller.state.countryCodee.value,
                   onChanged: (val) {
-                    controller.changeSelectGender(val!);
+                    controller.changeSelectCountryCode(val!);
                   },
                 ),
               ),
@@ -96,6 +95,91 @@ class SignUp extends StatelessWidget {
             },
             prefixIcon: passwordIcon,
             isuffixIconPassword: true,
+          ),
+          SizedBox(height: 16.h),
+          LayoutBuilder(
+            builder: (context, constraints) => RawAutocomplete<String>(
+              optionsViewBuilder: (BuildContext context,
+                  AutocompleteOnSelected<String> onSelected,
+                  Iterable<String> options) {
+                return Align(
+                  alignment: Alignment.topLeft,
+                  child: Material(
+                    elevation: 4.0,
+                    child: SizedBox(
+                      // height: 200.0,
+                      width: constraints.biggest.width,
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(8.0),
+                        itemCount: options.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final String option = options.elementAt(index);
+                          return GestureDetector(
+                            onTap: () {
+                              onSelected(option);
+                            },
+                            child: ListTile(
+                              title: Text(option),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                );
+              },
+              initialValue: TextEditingValue(
+                text: controller.state.slectedCity.value,
+              ),
+              optionsBuilder: (textValue) {
+                if (textValue.text.isEmpty) {
+                  return List.empty();
+                } else {
+                  if (textValue.text.length == 1) {
+                    controller.state.slectedCity.value = "";
+                    return controller.state.selecteCity.where((element) =>
+                        element
+                            .toLowerCase()
+                            .contains(textValue.text.toLowerCase()));
+                  } else {
+                    controller.state.slectedCity.value = textValue.text;
+                    return controller.state.selecteCity.where((element) =>
+                        element
+                            .toLowerCase()
+                            .contains(textValue.text.toLowerCase()));
+                  }
+                }
+              },
+              fieldViewBuilder: (context, textEditingController, focusNode,
+                  onFieldSubmitted) {
+                return CustomTextField(
+                  focusnode: focusNode,
+                  onEditingComplete: onFieldSubmitted,
+                  controller: textEditingController,
+                  hintText: 'City'.tr,
+                  onChange: (value) {
+                    // controller.state.categoryName = value;
+                  },
+                  prefixIcon: cityIcon,
+                  suffixIcon: const Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: Palette.primaryColor,
+                  ),
+                );
+              },
+            ),
+          ),
+          SizedBox(height: 16.h),
+          CustomTextField(
+            hintText: 'State'.tr,
+            onChange: (value) {},
+            prefixIcon: stateIcon,
+          ),
+          SizedBox(height: 16.h),
+          CustomTextField(
+            hintText: 'Zip code'.tr,
+            onChange: (value) {},
+            prefixIcon: zipcodeIcon,
           ),
 
           Padding(

@@ -54,6 +54,18 @@ const String imgMIcon = "$images/img_m.png";
 const String nameMIcon = "$images/name_m.png";
 const String startMakerIcon = "$images/startM.png";
 const String filterIcon = "$icons/filter.png";
+const String newIcon = "$icons/new.png";
+const String newunselectedIcon = "$icons/new_un.png";
+const String suiteIcon = "$icons/suite.png";
+const String dateSelectIcon = "$icons/expire.png";
+const String visaIcon = "$icons/visa.png";
+const String airIcon = "$icons/air.png";
+const String transportIcon = "$icons/trans.png";
+const String translationIcon = "$icons/translation.png";
+const String legalisationIcon = "$icons/legalisation.png";
+const String numbersIcon = "$icons/numbers.png";
+const String earningBackgroundIcon = "$icons/earnback.png";
+const String dollerIcon = "$icons/doller.png";
 
 ///
 ///dynamic images

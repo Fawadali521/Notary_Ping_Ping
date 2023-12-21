@@ -7,7 +7,6 @@ import 'package:notary_ping_notary/src/modules/dashboard/DashboardScreen.dart';
 import 'package:notary_ping_notary/src/states/signin/LoginController.dart';
 import 'package:notary_ping_notary/src/utility/CustomDivider.dart';
 import 'package:notary_ping_notary/src/utility/SocialButton.dart';
-import 'package:notary_ping_notary/src/utility/SubmitButton.dart';
 
 import '../../../../index.dart';
 

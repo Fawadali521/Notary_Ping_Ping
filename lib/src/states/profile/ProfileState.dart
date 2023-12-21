@@ -7,7 +7,11 @@ import '../../../index.dart';
 class ProfileState extends LoadingState {
   final RxString slectedCity = ''.obs;
   final RxBool isNotification = true.obs;
+  final RxBool isAvailability = true.obs;
   final RxString groupValue = 'English'.obs;
+  final RxString countryCodee = '+33'.obs;
+  TextEditingController licenseDate = TextEditingController();
+  TextEditingController expirationDate = TextEditingController();
   final RxList<String> allLanguages = [
     "English",
     "Spanish",
@@ -51,6 +55,12 @@ class ProfileState extends LoadingState {
     'Siliguri',
     'Nashik',
   ].obs;
+  final RxList<String> slectCountryCode = {
+    '+33',
+    '+91',
+    '+92',
+    '+241',
+  }.toList().obs;
 
   RxList<FAQsModel> filteredFAQS = [
     FAQsModel(

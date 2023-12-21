@@ -40,30 +40,75 @@ class _BookingsState extends State<Bookings> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Row(
+          SizedBox(
+            height: 35.h,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
               children: [
-                CustomBookingButon(
-                  onTap: () {
-                    currentIndex = 0;
-                    pageController?.jumpToPage(0);
-                    setState(() {});
-                  },
-                  title: 'Currents booking'.tr,
-                  icon: bookingsIcon,
-                  isSlected: currentIndex == 0 ? true : false,
+                Padding(
+                  padding: EdgeInsets.only(left: 20.w, right: 16.w),
+                  child: GestureDetector(
+                    onTap: () {
+                      currentIndex = 0;
+                      pageController?.jumpToPage(0);
+                      setState(() {});
+                    },
+                    child: Container(
+                      height: 35.h,
+                      padding: const EdgeInsets.only(
+                          left: 4, right: 14, top: 7, bottom: 7),
+                      decoration: BoxDecoration(
+                        color: currentIndex == 0
+                            ? Palette.primaryColor
+                            : Palette.whiteColor,
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(
+                            currentIndex == 0 ? newIcon : newunselectedIcon,
+                            height: 30.sp,
+                            width: 30.sp,
+                            fit: BoxFit.contain,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            "New".tr,
+                            style: TextStyles.titleMedium.copyWith(
+                              color: currentIndex == 0
+                                  ? Palette.whiteColor
+                                  : Palette.blackColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                SizedBox(width: 16.w),
                 CustomBookingButon(
                   onTap: () {
                     currentIndex = 1;
                     pageController?.jumpToPage(1);
                     setState(() {});
                   },
-                  title: 'History'.tr,
-                  icon: historyIcon,
+                  title: 'Currents booking'.tr,
+                  icon: bookingsIcon,
                   isSlected: currentIndex == 1 ? true : false,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 16.w, right: 20.w),
+                  child: CustomBookingButon(
+                    onTap: () {
+                      currentIndex = 2;
+                      pageController?.jumpToPage(2);
+                      setState(() {});
+                    },
+                    title: 'History'.tr,
+                    icon: historyIcon,
+                    isSlected: currentIndex == 2 ? true : false,
+                  ),
                 ),
               ],
             ),
@@ -87,6 +132,7 @@ class _BookingsState extends State<Bookings> {
                       name: userNamesList[index],
                       date: 'June 10,2023',
                       time: '10:30 AM',
+                      bookingStatus: "New",
                       onTap: () => Get.to(() => const Tracking()),
                     );
                   },
@@ -99,7 +145,20 @@ class _BookingsState extends State<Bookings> {
                       name: userNamesList[index],
                       date: 'June 10,2023',
                       time: '10:30 AM',
-                      isHistory: true,
+                      bookingStatus: "Tacking",
+                      onTap: () => Get.to(() => const Tracking()),
+                    );
+                  },
+                ),
+                ListView.builder(
+                  itemCount: userNamesList.length,
+                  itemBuilder: (context, index) {
+                    return CustomBookingItem(
+                      imgUrl: userImages[index],
+                      name: userNamesList[index],
+                      date: 'June 10,2023',
+                      time: '10:30 AM',
+                      bookingStatus: "View",
                       onTap: () {
                         showHistoryViewAlert(context);
                       },
