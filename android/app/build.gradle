@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.monkmaze.notarypingnotary.notary_ping_notary"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {

@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -24,13 +25,12 @@ class SelectLocationState extends State<SelectLocation> {
   List<LatLng> latlang = [];
   List<Marker> markers = []; //markers for google map
   Map<PolylineId, Polyline> polylines = {}; //polylines to show direction
-  late LatLng startLocation; //= const LatLng(34.611139, 72.4623079);
-  LatLng endLocation = const LatLng(34.60205, 72.454015);
+  late LatLng currentSelectLocation; //= const LatLng(34.611139, 72.4623079);
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
-  double paddingBottom = 0.45;
+  double paddingBottom = 0.75;
+  String currentLocation = '';
   @override
   void initState() {
-    latlang.add(endLocation);
     setState(() {
       isLoding = true;
     });
@@ -55,16 +55,20 @@ class SelectLocationState extends State<SelectLocation> {
         desiredAccuracy: LocationAccuracy.high,
       );
       log("location get ==> $position");
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(position.latitude, position.longitude);
       setState(() {
-        startLocation = LatLng(position.latitude, position.longitude);
-        latlang.add(startLocation);
+        currentSelectLocation = LatLng(position.latitude, position.longitude);
+        currentLocation =
+            "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.postalCode}";
+        latlang.add(currentSelectLocation);
         isLoding = false;
       });
-      log("location get ==> $startLocation");
+      log("location get ==> $currentSelectLocation");
       // addMarker(latlang);
     } catch (e) {
       log("Error in location get ==> $e");
-      startLocation = const LatLng(34.611139, 72.4623079);
+      currentSelectLocation = const LatLng(34.611139, 72.4623079);
       // addMarker(latlang);
       // checkLocationStatus();
     }
@@ -90,10 +94,26 @@ class SelectLocationState extends State<SelectLocation> {
     }
   }
 
+  addMarker(latLng) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+    print(
+        "len ===${placemarks.length} ==${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.postalCode}");
+    currentLocation =
+        "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.postalCode}";
+    setState(() {});
+    markers.clear();
+    markers.add(Marker(
+      consumeTapEvents: true,
+      markerId: MarkerId(latLng.toString()),
+      position: latLng,
+    ));
+  }
+
   animateToMyLocation() {
     setState(() {
       mapController!.animateCamera(
-        CameraUpdate.newLatLngZoom(startLocation, 16),
+        CameraUpdate.newLatLngZoom(currentSelectLocation, 16),
       );
     });
   }
@@ -125,7 +145,7 @@ class SelectLocationState extends State<SelectLocation> {
                     // compassEnabled: true,
                     zoomGesturesEnabled: true, //enable Zoom in, out on map
                     initialCameraPosition: CameraPosition(
-                      target: startLocation, //initial position
+                      target: currentSelectLocation, //initial position
                       zoom: 14.0, //initial zoom level
                     ),
                     polylines: Set<Polyline>.of(
@@ -138,6 +158,10 @@ class SelectLocationState extends State<SelectLocation> {
                         mapController = controller;
                       });
                     },
+                    onTap: (newLatLng) async {
+                      await addMarker(newLatLng);
+                      setState(() {});
+                    },
                   ),
                 ),
           SizedBox(
@@ -148,8 +172,8 @@ class SelectLocationState extends State<SelectLocation> {
                 return true; // Return true to indicate the notification is handled
               },
               child: DraggableScrollableSheet(
-                maxChildSize: .5,
-                initialChildSize: .5,
+                maxChildSize: .2,
+                initialChildSize: .07,
                 minChildSize: 0.07,
                 builder:
                     (BuildContext context, ScrollController scrollController) {
@@ -186,6 +210,11 @@ class SelectLocationState extends State<SelectLocation> {
                                 "Add address".tr,
                                 style: TextStyles.titleLarge,
                               ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              currentLocation,
+                              style: TextStyles.titleMedium,
                             ),
                             const SizedBox(height: 12),
                             SubmitButton(

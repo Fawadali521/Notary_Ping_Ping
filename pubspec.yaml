@@ -42,6 +42,7 @@ dependencies:
   percent_indicator: ^4.2.3
   dotted_border: ^2.1.0
   fl_chart: ^0.65.0
+  geocoding: ^2.1.1
 
 
 
