@@ -41,6 +41,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   percent_indicator: ^4.2.3
   dotted_border: ^2.1.0
+  fl_chart: ^0.65.0
 
 
 

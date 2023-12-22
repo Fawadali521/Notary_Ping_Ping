@@ -8,6 +8,7 @@ export 'package:notary_ping_notary/Infos.dart';
 export 'package:notary_ping_notary/constants.dart';
 export 'package:notary_ping_notary/image_strings.dart';
 export 'package:notary_ping_notary/src/utility/CustomAppBar.dart';
+export 'package:notary_ping_notary/src/utility/CustomDivider.dart';
 export 'package:notary_ping_notary/src/utility/CustomTextField.dart';
 export 'package:notary_ping_notary/src/utility/LoadingState.dart';
 export 'package:notary_ping_notary/src/utility/SnackBarToast.dart';

@@ -1,6 +1,10 @@
 // ignore_for_file: file_names
 
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:notary_ping_notary/index.dart';
+import 'package:notary_ping_notary/src/modules/dashboard/home/BarChart.dart';
+import 'package:notary_ping_notary/src/states/dashboard/DashboardController.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,6 +14,25 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  final DashboardController controller = Get.put(DashboardController());
+  late int showingTooltip;
+
+  @override
+  void initState() {
+    showingTooltip = -1;
+    super.initState();
+  }
+
+  BarChartGroupData generateGroupData(int x, int y) {
+    return BarChartGroupData(
+      x: x,
+      showingTooltipIndicators: showingTooltip == x ? [0] : [],
+      barRods: [
+        BarChartRodData(toY: y.toDouble()),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -191,7 +214,48 @@ class HomeState extends State<Home> {
                 ),
               ),
             ],
-          )
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 24.h),
+            child: const BarChartHome(),
+          ),
+          Obx(
+            () => Card(
+              elevation: 1,
+              margin: EdgeInsets.zero,
+              color: Palette.whiteColor,
+              surfaceTintColor: Palette.whiteColor,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Availability".tr,
+                          style: TextStyles.titleSmall,
+                        ),
+                        Text(
+                          "Only show online will be disable!".tr,
+                          style: TextStyles.bodySmall,
+                        ),
+                      ],
+                    ),
+                    CupertinoSwitch(
+                      activeColor: Palette.primaryColor,
+                      value: controller.state.isAvailability.value,
+                      onChanged: (value) {
+                        controller.state.isAvailability.value =
+                            !controller.state.isAvailability.value;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -66,7 +66,16 @@ const String legalisationIcon = "$icons/legalisation.png";
 const String numbersIcon = "$icons/numbers.png";
 const String earningBackgroundIcon = "$icons/earnback.png";
 const String dollerIcon = "$icons/doller.png";
+const String mastercardIcon = "$icons/mastercard.png";
 const String uploadDocumentIcon = "$icons/upload_document.png";
+const String paypalcardIcon = "$icons/paypalcard.png";
+const String visacardIcon = "$icons/visacard.png";
+
+///
+///images
+///
+
+const String showCardImage = "$images/showcard.png";
 
 ///
 ///dynamic images

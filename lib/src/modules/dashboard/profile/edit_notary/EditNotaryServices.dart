@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:notary_ping_notary/src/modules/dashboard/DashboardScreen.dart';
 import 'package:notary_ping_notary/src/states/profile/ProfileController.dart';
 
 import '../../../../../index.dart';
@@ -23,68 +24,81 @@ class _EditNotaryServicesState extends State<EditNotaryServices> {
         title: 'Edit Notary Profile'.tr,
         isBack: true,
       ),
-      body: ListView(
-        shrinkWrap: true,
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
+      body: Stack(
         children: [
-          Text(
-            "Add services".tr,
-            style: TextStyles.titleLarge,
-          ),
-          SizedBox(height: 12.h),
-          Wrap(
-            spacing: 5.w,
-            runSpacing: 5.h,
-            children: List.generate(
-              Infos().notaryServices.length,
-              (index) => InkWell(
-                onTap: () {
-                  setState(() {
-                    selectIndex = index;
-                  });
-                },
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
-                  decoration: BoxDecoration(
-                    color: selectIndex == index
-                        ? Palette.primaryColor
-                        : Palette.whiteColor,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Image.asset(
-                        Infos().notaryServicesImg[index],
-                        height: 20,
-                        width: 20,
+          ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            children: [
+              Text(
+                "Add services".tr,
+                style: TextStyles.titleLarge,
+              ),
+              SizedBox(height: 12.h),
+              Wrap(
+                spacing: 5.w,
+                runSpacing: 5.h,
+                children: List.generate(
+                  Infos().notaryServices.length,
+                  (index) => InkWell(
+                    onTap: () {
+                      setState(() {
+                        selectIndex = index;
+                      });
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                      decoration: BoxDecoration(
                         color: selectIndex == index
-                            ? Palette.whiteColor
-                            : Palette.greyTextColor,
-                        fit: BoxFit.contain,
+                            ? Palette.primaryColor
+                            : Palette.whiteColor,
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        Infos().notaryServices[index],
-                        style: TextStyles.bodyMedium.copyWith(
-                          color: selectIndex == index
-                              ? Palette.whiteColor
-                              : Palette.greyTextColor,
-                        ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(
+                            Infos().notaryServicesImg[index],
+                            height: 20,
+                            width: 20,
+                            color: selectIndex == index
+                                ? Palette.whiteColor
+                                : Palette.greyTextColor,
+                            fit: BoxFit.contain,
+                          ),
+                          SizedBox(width: 8.w),
+                          Text(
+                            Infos().notaryServices[index],
+                            style: TextStyles.bodyMedium.copyWith(
+                              color: selectIndex == index
+                                  ? Palette.whiteColor
+                                  : Palette.greyTextColor,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SubmitButton(
+                    title: 'Update'.tr,
+                    onTap: () => Get.offAll(() => const Dashboard()),
+                  ),
+                ],
+              ),
             ),
           ),
-          SizedBox(height: 80.h),
-          SubmitButton(
-            title: 'Update'.tr,
-            onTap: () {},
-          ),
-          SizedBox(height: 20.h),
         ],
       ),
     );

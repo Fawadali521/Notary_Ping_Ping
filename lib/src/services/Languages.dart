@@ -127,6 +127,17 @@ class Languages extends Translations {
               'Unlock premium features with our monthly subscription',
           'Add notary documents': 'Add notary documents',
           'Add driving license': 'Add driving license',
+          'Save payment option': 'Save payment option',
+          'Add card': 'Add card',
+          'Confirm payment': 'Confirm payment',
+          'Add payment method': 'Add payment method',
+          'Card holder name': 'Card holder name',
+          'Card number': 'Card number',
+          'Expiration date': 'Expiration date',
+          'CVV': 'CVV',
+          'Amount': 'Amount',
+          'Your payment has been successfully processed.Thank you for choosing our services.':
+              'Your payment has been successfully processed.Thank you for choosing our services.',
           '': '',
         },
       };

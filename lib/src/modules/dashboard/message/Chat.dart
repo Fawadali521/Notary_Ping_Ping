@@ -401,68 +401,103 @@ class _ChatState extends State<Chat> {
 
   setting() {
     return showModalBottomSheet<void>(
+      backgroundColor: Colors.transparent,
+      shape: ShapeBorder.lerp(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        ),
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        ),
+        1,
+      ),
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          height: 140.w,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => Get.back(),
-                  child: Center(
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          reportIcon,
-                          height: 28.w,
-                          width: 28.w,
-                        ),
-                        SizedBox(width: 16.w),
-                        Expanded(
-                          child: Text(
-                            "Report id".tr,
-                            style: TextStyles.titleSmall,
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 12.w),
+              decoration: BoxDecoration(
+                color: Palette.whiteColor,
+                borderRadius: BorderStyles.medium,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 12.h, horizontal: 16.w),
+                      child: Stack(
+                        alignment: Alignment.centerLeft,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Report id".tr,
+                                style: TextStyles.titleSmall,
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                          Image.asset(
+                            reportIcon,
+                            height: 28.w,
+                            width: 28.w,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ),
-              const CustomDivider(),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => Get.back(),
-                  child: Center(
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          deleteIcon,
-                          height: 28.w,
-                          width: 28.w,
-                          color: Palette.redColor,
-                        ),
-                        SizedBox(width: 16.w),
-                        Expanded(
-                          child: Text(
-                            "Delete".tr,
-                            style: TextStyles.titleSmall.copyWith(
-                              color: Palette.redColor,
-                            ),
+                  const CustomDivider(),
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 12.h, horizontal: 16.w),
+                      child: Stack(
+                        alignment: Alignment.centerLeft,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Delete".tr,
+                                style: TextStyles.titleSmall.copyWith(
+                                  color: Palette.redColor,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                          Image.asset(
+                            deleteIcon,
+                            height: 28.w,
+                            width: 28.w,
+                            color: Palette.redColor,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+              child: SubmitButton(
+                onTap: () => Get.back(),
+                title: "Cancel",
+                backGroundColor: Palette.whiteColor,
+                titleColor: Palette.primaryColor,
+                boderColor: Palette.whiteColor,
+              ),
+            )
+          ],
         );
       },
     );

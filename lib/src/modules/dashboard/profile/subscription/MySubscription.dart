@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:notary_ping_notary/src/modules/dashboard/profile/subscription/PayNow.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/utility/SubscriptionCard.dart';
 import 'package:notary_ping_notary/src/states/profile/ProfileController.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -115,7 +116,7 @@ class MySubscription extends StatelessWidget {
           SizedBox(height: 24.h),
           SubmitButton(
             title: 'Get started'.tr,
-            onTap: () {},
+            onTap: () => Get.to(() => const PayNow()),
           ),
           SizedBox(height: 20.h),
         ],
