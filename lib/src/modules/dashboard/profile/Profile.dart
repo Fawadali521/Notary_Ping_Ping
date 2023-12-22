@@ -7,6 +7,7 @@ import 'package:notary_ping_notary/src/modules/dashboard/profile/CustomerSupport
 import 'package:notary_ping_notary/src/modules/dashboard/profile/EditProfile.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/PrivacyPolicy.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/TermAndCondition.dart';
+import 'package:notary_ping_notary/src/modules/dashboard/profile/address_managment/SelectLocation.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/edit_notary/EditNotaryContact.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/subscription/MySubscription.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/utility/CustomProfileItem.dart';
@@ -89,7 +90,7 @@ class Profile extends StatelessWidget {
           CustomProfileItem(
             title: "Address management",
             icon: locationIcon,
-            onTap: () => Get.to(() => MySubscription()),
+            onTap: () => Get.to(() => const SelectLocation()),
           ),
           CustomProfileItem(
             title: "My subscription",
