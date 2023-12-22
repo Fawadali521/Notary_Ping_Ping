@@ -1,20 +1,8 @@
-// ignore_for_file: file_names
+// // ignore_for_file: file_names
 
-// import 'dart:async';
-// import 'dart:developer';
 // import 'dart:io';
 
-// import 'package:avatar_glow/avatar_glow.dart';
-// import 'package:flutter_dash/flutter_dash.dart';
-// import 'package:geolocator/geolocator.dart';
-// import 'package:notary_ping_notary/index.dart';
-// import 'package:notary_ping_notary/src/constant/time_formate.dart';
-// import 'package:notary_ping_notary/src/modules/dashboard/bookings/utility/CustomRadio.dart';
-// import 'package:notary_ping_notary/src/modules/dashboard/bookings/utility/TrackingItem.dart';
-// import 'package:notary_ping_notary/src/modules/dashboard/bookings/utility/WdigetToMarker.dart';
-// import 'package:notary_ping_notary/src/modules/dashboard/message/Chat.dart';
-// import 'package:notary_ping_notary/src/utility/maps_utility/MarkerImage.dart';
-// import 'package:permission_handler/permission_handler.dart';
+// import '../../../../../index.dart';
 
 // class Tracking extends StatefulWidget {
 //   const Tracking({super.key});

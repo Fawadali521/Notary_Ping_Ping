@@ -87,6 +87,11 @@ class Profile extends StatelessWidget {
             onTap: () => Get.to(() => EditNotaryContact()),
           ),
           CustomProfileItem(
+            title: "Address management",
+            icon: locationIcon,
+            onTap: () => Get.to(() => MySubscription()),
+          ),
+          CustomProfileItem(
             title: "My subscription",
             icon: settingIcon,
             onTap: () => Get.to(() => MySubscription()),
