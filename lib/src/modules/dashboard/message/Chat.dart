@@ -8,7 +8,6 @@ import 'package:notary_ping_notary/src/modules/dashboard/message/utility/AudioMe
 import 'package:notary_ping_notary/src/modules/dashboard/message/utility/MessageBar.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/message/utility/TextMessage.dart';
 import 'package:notary_ping_notary/src/states/message/MessageController.dart';
-import 'package:notary_ping_notary/src/utility/CustomDivider.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../../index.dart';

@@ -43,6 +43,8 @@ dependencies:
   dotted_border: ^2.1.0
   fl_chart: ^0.65.0
   geocoding: ^2.1.1
+  http: ^1.1.2
+  uuid: ^4.2.2
 
 
 

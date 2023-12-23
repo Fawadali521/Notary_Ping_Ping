@@ -3,7 +3,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/utility/CustomLanguageItem.dart';
 import 'package:notary_ping_notary/src/states/profile/ProfileController.dart';
-import 'package:notary_ping_notary/src/utility/CustomDivider.dart';
 
 import '../../../../index.dart';
 

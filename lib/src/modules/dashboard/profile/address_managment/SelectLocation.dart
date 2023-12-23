@@ -1,11 +1,15 @@
 // ignore_for_file: file_names
 
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
+import 'package:notary_ping_notary/src/modules/dashboard/profile/address_managment/AddDetails.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../../index.dart';
 
@@ -27,8 +31,14 @@ class SelectLocationState extends State<SelectLocation> {
   Map<PolylineId, Polyline> polylines = {}; //polylines to show direction
   late LatLng currentSelectLocation; //= const LatLng(34.611139, 72.4623079);
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
-  double paddingBottom = 0.75;
+  double paddingBottom = 0.04;
   String currentLocation = '';
+  TextEditingController placesController = TextEditingController();
+  var uuid = const Uuid();
+  String sessionToken = DateTime.now().second.toString();
+  List<dynamic> places = [];
+  bool isListShow = false;
+
   @override
   void initState() {
     setState(() {
@@ -41,6 +51,46 @@ class SelectLocationState extends State<SelectLocation> {
       getCurrentLocation();
     }
     super.initState();
+    placesController.addListener(() {
+      onChange();
+    });
+  }
+
+  void onChange() {
+    // if(sessionToken == null){
+    sessionToken = uuid.v4();
+    // }
+    getSuggestion(placesController.text);
+  }
+
+  getSuggestion(String input) async {
+    String baseURL =
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+    String request =
+        '$baseURL?input=$input&key=${Constants.googleMapsApiKey}&sessiontoken=$sessionToken';
+    var response = await http.get(Uri.parse(request));
+    // var data = response.body.toString();
+    log(response.body.toString());
+    if (response.statusCode == 200) {
+      log("sucess");
+      setState(() {
+        places = jsonDecode(response.body.toString())['predictions'];
+      });
+    } else {
+      setState(() {
+        isListShow = false;
+      });
+      throw Exception("not loaded places");
+    }
+    if (places.isNotEmpty) {
+      setState(() {
+        isListShow = true;
+      });
+    } else {
+      setState(() {
+        isListShow = false;
+      });
+    }
   }
 
   Future<void> getCurrentLocation() async {
@@ -60,7 +110,7 @@ class SelectLocationState extends State<SelectLocation> {
       setState(() {
         currentSelectLocation = LatLng(position.latitude, position.longitude);
         currentLocation =
-            "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.postalCode}";
+            ("${placemarks.first.name}, ${placemarks.first.thoroughfare}, ${placemarks.first.locality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}, ${placemarks.first.postalCode}");
         latlang.add(currentSelectLocation);
         isLoding = false;
       });
@@ -97,10 +147,10 @@ class SelectLocationState extends State<SelectLocation> {
   addMarker(latLng) async {
     List<Placemark> placemarks =
         await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
-    print(
-        "len ===${placemarks.length} ==${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.postalCode}");
+    log(" address ==> ${placemarks.first.toString()}");
+    log("show address ==> ${placemarks.first.name}, ${placemarks.first.thoroughfare}, ${placemarks.first.locality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}, ${placemarks.first.postalCode},");
     currentLocation =
-        "${placemarks.first.street}, ${placemarks.first.subLocality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.postalCode}";
+        ("${placemarks.first.name}, ${placemarks.first.thoroughfare}, ${placemarks.first.locality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}, ${placemarks.first.postalCode}");
     setState(() {});
     markers.clear();
     markers.add(Marker(
@@ -108,6 +158,8 @@ class SelectLocationState extends State<SelectLocation> {
       markerId: MarkerId(latLng.toString()),
       position: latLng,
     ));
+    await animateToMyLocation();
+    placesController.clear();
   }
 
   animateToMyLocation() {
@@ -172,7 +224,7 @@ class SelectLocationState extends State<SelectLocation> {
                 return true; // Return true to indicate the notification is handled
               },
               child: DraggableScrollableSheet(
-                maxChildSize: .2,
+                maxChildSize: .25,
                 initialChildSize: .07,
                 minChildSize: 0.07,
                 builder:
@@ -216,12 +268,16 @@ class SelectLocationState extends State<SelectLocation> {
                               currentLocation,
                               style: TextStyles.titleMedium,
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 24),
                             SubmitButton(
                               onTap: () {
-                                // showCancelBookingAlert(context);
+                                if (currentLocation.isNotEmpty) {
+                                  Get.to(() => AddDetails(
+                                        location: currentLocation,
+                                      ));
+                                }
                               },
-                              title: "Enter complete address".tr,
+                              title: "Complete address".tr,
                             ),
                           ],
                         );
@@ -284,10 +340,12 @@ class SelectLocationState extends State<SelectLocation> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
             width: Get.width,
+            // color: Palette.whiteColor,
             child: Row(
               children: [
                 Expanded(
                   child: CustomTextField(
+                    controller: placesController,
                     hintText: "Search".tr,
                     prefixIcon: searchIcon,
                     prefixIconColor: Palette.greyTextColor,
@@ -324,79 +382,31 @@ class SelectLocationState extends State<SelectLocation> {
               ],
             ),
           ),
+          Container(
+            width: 1.sw,
+            color: isListShow ? Palette.whiteColor : Colors.transparent,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: places.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(places[index]['description']),
+                  onTap: () async {
+                    List<Location> locations =
+                        await locationFromAddress(places[index]['description']);
+                    log("long ==>${locations.last.longitude} && lat ==> ${locations.last.latitude}");
+                    currentSelectLocation = LatLng(
+                        locations.last.latitude, locations.last.longitude);
+                    await addMarker(currentSelectLocation);
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    placesController.clear();
+                  },
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
   }
-}
-
-showCancelBookingAlert(BuildContext context) {
-  showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Palette.whiteColor,
-          surfaceTintColor: Palette.whiteColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(20),
-            ),
-          ),
-          contentPadding: const EdgeInsets.all(0),
-          insetPadding: const EdgeInsets.symmetric(horizontal: 14),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              InkWell(
-                onTap: () => Navigator.of(context).pop(),
-                child: const Align(
-                  alignment: Alignment.topRight,
-                  child: Padding(
-                    padding:
-                        EdgeInsets.only(bottom: 5, left: 5, top: 8, right: 8),
-                    child: Icon(
-                      Icons.close,
-                      color: Palette.redColor,
-                    ),
-                  ),
-                ),
-              ),
-              const CircleAvatar(
-                radius: 45,
-                backgroundColor: Palette.lightRedColor,
-                child: CircleAvatar(
-                  radius: 38,
-                  backgroundColor: Palette.redColor,
-                  child: Icon(
-                    Icons.close,
-                    color: Palette.whiteColor,
-                    size: 30,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                "Cancel booking".tr,
-                style: TextStyles.headlineLarge,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 5, bottom: 30, left: 20, right: 20),
-                child: Text(
-                  "Are you sure do you want to cancel this booking".tr,
-                  style: TextStyles.bodyMedium,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                child: SubmitButton(
-                  onTap: () {},
-                  title: "Cancel booking".tr,
-                ),
-              ),
-            ],
-          ),
-        );
-      });
 }
