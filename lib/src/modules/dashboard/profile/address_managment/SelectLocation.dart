@@ -423,7 +423,8 @@ class SelectLocationState extends State<SelectLocation> {
                     log("long ==>${locations.last.longitude} && lat ==> ${locations.last.latitude}");
                     currentSelectLocation = LatLng(
                         locations.last.latitude, locations.last.longitude);
-                    locationUpdate(currentSelectLocation);
+                    await locationUpdate(currentSelectLocation);
+                    animateToMyLocation();
                     FocusManager.instance.primaryFocus?.unfocus();
                     placesController.clear();
                   },

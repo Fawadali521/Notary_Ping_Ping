@@ -13,6 +13,7 @@ class MessageBar extends StatelessWidget {
   final void Function()? onTapCloseReply;
   final VoidCallback onTapVoice;
   final VoidCallback onTapRefreshFile;
+  final FocusNode focusNode;
   final RecorderController recorderController;
 
   /// [MessageBar] constructor
@@ -28,6 +29,7 @@ class MessageBar extends StatelessWidget {
     required this.onTapVoice,
     required this.onTapRefreshFile,
     required this.recorderController,
+    required this.focusNode,
   });
   final MessageController controller = Get.find();
 
@@ -80,6 +82,7 @@ class MessageBar extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: TextFormField(
+                                    focusNode: focusNode,
                                     controller: _textController,
                                     keyboardType: TextInputType.multiline,
                                     textCapitalization:

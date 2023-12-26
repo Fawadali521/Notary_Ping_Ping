@@ -31,13 +31,18 @@ class _ChatState extends State<Chat> {
   bool isLoading = true;
   late Directory appDirectory;
   final ScrollController _scrollController = ScrollController();
-
+  final FocusNode focusNode = FocusNode();
   @override
   void initState() {
     super.initState();
 
     _getDir();
     _initialiseControllers();
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        moveUpper();
+      }
+    });
   }
 
   void _getDir() async {
@@ -59,6 +64,17 @@ class _ChatState extends State<Chat> {
   void dispose() {
     recorderController.dispose();
     super.dispose();
+  }
+
+  moveUpper() async {
+    await Future.delayed(const Duration(milliseconds: 500), () {});
+    Future.delayed(const Duration(milliseconds: 100), () {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    });
   }
 
   @override
@@ -253,6 +269,7 @@ class _ChatState extends State<Chat> {
                 );
               }),
           MessageBar(
+            focusNode: focusNode,
             onTapRefreshFile: controller.state.isRecording.value
                 ? () {
                     _refreshWave();
