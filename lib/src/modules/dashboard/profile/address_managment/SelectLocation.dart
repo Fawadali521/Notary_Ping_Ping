@@ -216,8 +216,8 @@ class SelectLocationState extends State<SelectLocation> {
                       )
                     },
                     onCameraMove: ((position) {
-                      // currentSelectLocation = position.target;
-                      // setState(() {});
+                      currentSelectLocation = position.target;
+                      setState(() {});
 
                       locationUpdate(position.target);
                     }),
