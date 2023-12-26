@@ -7,18 +7,18 @@ import 'package:notary_ping_notary/src/utility/CustomDropDown.dart';
 
 import '../../../../../index.dart';
 
-class AddDetails extends StatefulWidget {
+class UpdateLocation extends StatefulWidget {
   final String location;
-  const AddDetails({
+  const UpdateLocation({
     Key? key,
     required this.location,
   }) : super(key: key);
 
   @override
-  State<AddDetails> createState() => _AddDetailsState();
+  State<UpdateLocation> createState() => _UpdateLocationState();
 }
 
-class _AddDetailsState extends State<AddDetails> {
+class _UpdateLocationState extends State<UpdateLocation> {
   final ProfileController controller = Get.find<ProfileController>();
   TextEditingController addressController = TextEditingController();
   @override
@@ -33,7 +33,7 @@ class _AddDetailsState extends State<AddDetails> {
       backgroundColor: Palette.whiteColor,
       appBar: CustomAppBar(
         color: Palette.whiteColor,
-        title: 'Address Details'.tr,
+        title: 'Update Address'.tr,
         isBack: true,
       ),
       body: Stack(
@@ -43,7 +43,7 @@ class _AddDetailsState extends State<AddDetails> {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             children: [
               Text(
-                "Contact information".tr,
+                "Address information".tr,
                 style: TextStyles.titleLarge,
               ),
               SizedBox(height: 12.h),
@@ -139,7 +139,7 @@ class _AddDetailsState extends State<AddDetails> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SubmitButton(
-                    title: 'Add Address'.tr,
+                    title: 'Update Address'.tr,
                     onTap: () => Get.to(() => EditNotaryProfessional()),
                   ),
                 ],

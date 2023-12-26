@@ -18,7 +18,7 @@ class HomeTrakingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      elevation: 1,
       color: Palette.whiteColor,
       surfaceTintColor: Palette.whiteColor,
       margin: EdgeInsets.zero,

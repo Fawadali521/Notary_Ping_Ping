@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:notary_ping_notary/index.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/home/BarChart.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/home/utility/HomeTrakingItem.dart';
@@ -220,43 +219,43 @@ class HomeState extends State<Home> {
             padding: EdgeInsets.symmetric(vertical: 24.h),
             child: const BarChartHome(),
           ),
-          Obx(
-            () => Card(
-              elevation: 1,
-              margin: EdgeInsets.zero,
-              color: Palette.whiteColor,
-              surfaceTintColor: Palette.whiteColor,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Availability".tr,
-                          style: TextStyles.titleSmall,
-                        ),
-                        Text(
-                          "Only show online will be disable!".tr,
-                          style: TextStyles.bodySmall,
-                        ),
-                      ],
-                    ),
-                    CupertinoSwitch(
-                      activeColor: Palette.primaryColor,
-                      value: controller.state.isAvailability.value,
-                      onChanged: (value) {
-                        controller.state.isAvailability.value =
-                            !controller.state.isAvailability.value;
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // Obx(
+          //   () => Card(
+          //     elevation: 1,
+          //     margin: EdgeInsets.zero,
+          //     color: Palette.whiteColor,
+          //     surfaceTintColor: Palette.whiteColor,
+          //     child: Padding(
+          //       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
+          //       child: Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: [
+          //           Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: [
+          //               Text(
+          //                 "Availability".tr,
+          //                 style: TextStyles.titleSmall,
+          //               ),
+          //               Text(
+          //                 "Only show online will be disable!".tr,
+          //                 style: TextStyles.bodySmall,
+          //               ),
+          //             ],
+          //           ),
+          //           CupertinoSwitch(
+          //             activeColor: Palette.primaryColor,
+          //             value: controller.state.isAvailability.value,
+          //             onChanged: (value) {
+          //               controller.state.isAvailability.value =
+          //                   !controller.state.isAvailability.value;
+          //             },
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

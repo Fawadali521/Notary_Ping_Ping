@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
-import 'package:notary_ping_notary/src/modules/dashboard/profile/address_managment/AddDetails.dart';
+import 'package:notary_ping_notary/src/modules/dashboard/profile/address_managment/LocationDetails.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:uuid/uuid.dart';
 
@@ -38,11 +38,13 @@ class SelectLocationState extends State<SelectLocation> {
   String sessionToken = DateTime.now().second.toString();
   List<dynamic> places = [];
   bool isListShow = false;
+  bool isLocationAddress = false;
 
   @override
   void initState() {
     setState(() {
       isLoding = true;
+      isLocationAddress = true;
     });
     // widgetToImage();
     if (Platform.isAndroid) {
@@ -112,6 +114,8 @@ class SelectLocationState extends State<SelectLocation> {
         currentLocation =
             ("${placemarks.first.name}, ${placemarks.first.thoroughfare}, ${placemarks.first.locality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}, ${placemarks.first.postalCode}");
         latlang.add(currentSelectLocation);
+        // addMarker(currentSelectLocation);
+        isLocationAddress = false;
         isLoding = false;
       });
       log("location get ==> $currentSelectLocation");
@@ -144,30 +148,25 @@ class SelectLocationState extends State<SelectLocation> {
     }
   }
 
-  addMarker(latLng) async {
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
-    log(" address ==> ${placemarks.first.toString()}");
-    log("show address ==> ${placemarks.first.name}, ${placemarks.first.thoroughfare}, ${placemarks.first.locality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}, ${placemarks.first.postalCode},");
-    currentLocation =
-        ("${placemarks.first.name}, ${placemarks.first.thoroughfare}, ${placemarks.first.locality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}, ${placemarks.first.postalCode}");
-    setState(() {});
-    markers.clear();
-    markers.add(Marker(
-      consumeTapEvents: true,
-      markerId: MarkerId(latLng.toString()),
-      position: latLng,
-    ));
-    await animateToMyLocation();
-    placesController.clear();
-  }
-
   animateToMyLocation() {
     setState(() {
       mapController!.animateCamera(
         CameraUpdate.newLatLngZoom(currentSelectLocation, 16),
       );
     });
+  }
+
+  locationUpdate(LatLng latLng) async {
+    currentSelectLocation = latLng;
+    // setState(() {});
+    List<Placemark> placemarks = await placemarkFromCoordinates(
+        currentSelectLocation.latitude, currentSelectLocation.longitude);
+    // log(" address ==> ${placemarks.first.toString()}");
+    // log("show address ==> ${placemarks.first.name}, ${placemarks.first.thoroughfare}, ${placemarks.first.locality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}, ${placemarks.first.postalCode},");
+    currentLocation =
+        ("${placemarks.first.name}, ${placemarks.first.thoroughfare}, ${placemarks.first.locality}, ${placemarks.first.subAdministrativeArea}, ${placemarks.first.administrativeArea}, ${placemarks.first.country}, ${placemarks.first.postalCode}");
+    setState(() {});
+    // animateToMyLocation();
   }
 
   @override
@@ -191,7 +190,9 @@ class SelectLocationState extends State<SelectLocation> {
               : Padding(
                   padding: EdgeInsets.only(bottom: paddingBottom.sh),
                   child: GoogleMap(
-                    padding: EdgeInsets.only(top: 0.04.sh, bottom: 0.03.sh),
+                    padding: !isLoding
+                        ? EdgeInsets.zero
+                        : EdgeInsets.only(top: 0.04.sh, bottom: 0.03.sh),
                     myLocationEnabled: true, //set your location enable
                     myLocationButtonEnabled: false,
                     // compassEnabled: true,
@@ -202,7 +203,24 @@ class SelectLocationState extends State<SelectLocation> {
                     ),
                     polylines: Set<Polyline>.of(
                         polylines.values), //polylines to show directions
-                    markers: markers.toSet(), //markers to show on map
+                    // markers: markers.toSet(), //markers to show on map
+                    markers: <Marker>{
+                      Marker(
+                        draggable: true,
+                        markerId: const MarkerId("1"),
+                        position: currentSelectLocation,
+                        icon: BitmapDescriptor.defaultMarker,
+                        infoWindow: const InfoWindow(
+                          title: 'Usted está aquí',
+                        ),
+                      )
+                    },
+                    onCameraMove: ((position) {
+                      // currentSelectLocation = position.target;
+                      // setState(() {});
+
+                      locationUpdate(position.target);
+                    }),
                     // mapType: MapType.normal, //map type
                     onMapCreated: (controller) {
                       //method called when map is created
@@ -210,84 +228,85 @@ class SelectLocationState extends State<SelectLocation> {
                         mapController = controller;
                       });
                     },
-                    onTap: (newLatLng) async {
-                      await addMarker(newLatLng);
-                      setState(() {});
-                    },
+                    // onTap: (newLatLng) async {
+                    //   currentSelectLocation = newLatLng;
+                    //   setState(() {});
+                    // },
                   ),
                 ),
-          SizedBox(
-            child: NotificationListener<DraggableScrollableNotification>(
-              onNotification: (DraggableScrollableNotification dSNotification) {
-                paddingBottom = dSNotification.extent - 0.03;
-                setState(() {});
-                return true; // Return true to indicate the notification is handled
-              },
-              child: DraggableScrollableSheet(
-                maxChildSize: .25,
-                initialChildSize: .07,
-                minChildSize: 0.07,
-                builder:
-                    (BuildContext context, ScrollController scrollController) {
-                  return Container(
-                    decoration: const BoxDecoration(
-                      color: Palette.whiteColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+          !isLoding
+              ? DraggableScrollableSheet(
+                  maxChildSize: .22,
+                  initialChildSize: .22,
+                  minChildSize: 0.22,
+                  builder: (BuildContext context,
+                      ScrollController scrollController) {
+                    return Container(
+                      decoration: const BoxDecoration(
+                        color: Palette.whiteColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
                       ),
-                    ),
-                    child: ListView.builder(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.w,
-                        vertical: 16.h,
-                      ),
-                      controller: scrollController,
-                      itemCount: 1,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Divider(
-                              height: 0,
-                              color: Palette.dotColor,
-                              thickness: 3,
-                              endIndent: .34.sw,
-                              indent: .34.sw,
-                            ),
-                            SizedBox(height: 12.h),
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Text(
-                                "Add address".tr,
-                                style: TextStyles.titleLarge,
+                      child: ListView.builder(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20.w,
+                          vertical: 16.h,
+                        ),
+                        controller: scrollController,
+                        itemCount: 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Divider(
+                                height: 0,
+                                color: Palette.dotColor,
+                                thickness: 3,
+                                endIndent: .34.sw,
+                                indent: .34.sw,
                               ),
-                            ),
-                            const SizedBox(height: 12),
-                            Text(
-                              currentLocation,
-                              style: TextStyles.titleMedium,
-                            ),
-                            const SizedBox(height: 24),
-                            SubmitButton(
-                              onTap: () {
-                                if (currentLocation.isNotEmpty) {
-                                  Get.to(() => AddDetails(
-                                        location: currentLocation,
-                                      ));
-                                }
-                              },
-                              title: "Complete address".tr,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+                              SizedBox(height: 12.h),
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    locationIcon,
+                                    height: 20,
+                                    width: 20,
+                                    color: Palette.primaryColor,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  SizedBox(width: 12.w),
+                                  Expanded(
+                                    child: Text(
+                                      currentLocation,
+                                      style: TextStyles.titleMedium,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 24),
+                              SubmitButton(
+                                onTap: () {
+                                  if (currentLocation.isNotEmpty) {
+                                    // Get.to(() => AddDetails(
+                                    //       location: currentLocation,
+                                    //     ));
+                                    LocationDetails(context, currentLocation);
+                                  }
+                                },
+                                title: "Enter Complete address".tr,
+                              ),
+                              const SizedBox(height: 24),
+                            ],
+                          );
+                        },
+                      ),
+                    );
+                  },
+                )
+              : const SizedBox(),
           topBar(),
         ],
       ),
@@ -357,7 +376,14 @@ class SelectLocationState extends State<SelectLocation> {
                 SizedBox(width: 16.w),
                 GestureDetector(
                   onTap: () async {
-                    await getCurrentLocation();
+                    // await getCurrentLocation();
+                    // animateToMyLocation();
+                    Position position = await Geolocator.getCurrentPosition(
+                      desiredAccuracy: LocationAccuracy.high,
+                    );
+                    LatLng curentPosition =
+                        LatLng(position.latitude, position.longitude);
+                    await locationUpdate(curentPosition);
                     animateToMyLocation();
                   },
                   child: Container(
@@ -397,7 +423,7 @@ class SelectLocationState extends State<SelectLocation> {
                     log("long ==>${locations.last.longitude} && lat ==> ${locations.last.latitude}");
                     currentSelectLocation = LatLng(
                         locations.last.latitude, locations.last.longitude);
-                    await addMarker(currentSelectLocation);
+                    locationUpdate(currentSelectLocation);
                     FocusManager.instance.primaryFocus?.unfocus();
                     placesController.clear();
                   },
