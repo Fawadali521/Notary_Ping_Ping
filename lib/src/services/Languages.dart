@@ -139,6 +139,7 @@ class Languages extends Translations {
           'Your payment has been successfully processed.Thank you for choosing our services.':
               'Your payment has been successfully processed.Thank you for choosing our services.',
           'Select location': 'Select location',
+          'Address book': 'Address book',
           '': '',
         },
       };
