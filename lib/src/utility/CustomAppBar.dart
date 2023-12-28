@@ -1,5 +1,7 @@
 // ignore_for_file: file_names, non_constant_identifier_names
 
+import 'package:notary_ping_notary/src/modules/dashboard/notification/Notification.dart';
+
 import '../../index.dart';
 
 PreferredSize CustomAppBar(
@@ -31,7 +33,7 @@ PreferredSize CustomAppBar(
       actions: [
         isNotification == true
             ? GestureDetector(
-                // onTap: () => Get.to(() => const Notification()),
+                onTap: () => Get.to(() => const NotificationPage()),
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
