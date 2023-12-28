@@ -70,6 +70,8 @@ const String mastercardIcon = "$icons/mastercard.png";
 const String uploadDocumentIcon = "$icons/upload_document.png";
 const String paypalcardIcon = "$icons/paypalcard.png";
 const String visacardIcon = "$icons/visacard.png";
+const String mapMarkerIcon = "$icons/map_loc.png";
+const String editAddressIcon = "$icons/edit_add.png";
 
 ///
 ///images

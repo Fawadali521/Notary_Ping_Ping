@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:notary_ping_notary/index.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/home/BarChart.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/home/utility/HomeTrakingItem.dart';
+import 'package:notary_ping_notary/src/modules/dashboard/notification/Notification.dart';
 import 'package:notary_ping_notary/src/states/dashboard/DashboardController.dart';
 
 class Home extends StatefulWidget {
@@ -94,7 +95,7 @@ class HomeState extends State<Home> {
               ),
               const Spacer(),
               GestureDetector(
-                // onTap: () => Get.to(() => const Notification()),
+                onTap: () => Get.to(() => const NotificationPage()),
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
