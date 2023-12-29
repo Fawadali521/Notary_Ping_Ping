@@ -72,6 +72,7 @@ const String paypalcardIcon = "$icons/paypalcard.png";
 const String visacardIcon = "$icons/visacard.png";
 const String mapMarkerIcon = "$icons/map_loc.png";
 const String editAddressIcon = "$icons/edit_add.png";
+const String privacyPolicyIcon = "$icons/pp.png";
 
 ///
 ///images

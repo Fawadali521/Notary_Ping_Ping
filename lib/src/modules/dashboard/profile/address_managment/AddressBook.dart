@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:flutter/cupertino.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/address_managment/SelectLocation.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/address_managment/UpdateLocation.dart';
 import 'package:notary_ping_notary/src/states/profile/ProfileController.dart';
@@ -66,12 +67,29 @@ class AddressBook extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Fawad Khan",
-                        style: TextStyles.titleLarge,
+                      const Expanded(
+                        child: Text(
+                          "Fawad Khan",
+                          style: TextStyles.titleLarge,
+                        ),
                       ),
+                      SizedBox(width: 12.w),
+                      Obx(
+                        () => Transform.scale(
+                          scale: 0.7,
+                          child: CupertinoSwitch(
+                            activeColor: Palette.primaryColor,
+                            value: controller.state.isNotification.value,
+                            onChanged: (value) {
+                              controller.state.isNotification.value =
+                                  !controller.state.isNotification.value;
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12.w),
                       InkWell(
                         onTap: () => Get.to(() => const UpdateLocation()),
                         child: Image.asset(
@@ -84,24 +102,15 @@ class AddressBook extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
+                    padding: EdgeInsets.only(bottom: 8.h),
                     child: const Text(
-                      "abc, Peshawar, Khyber Pakhtunkhwa, Pakistan",
+                      "15205 North Kierland Blvd. Suite 100, Cityville, California, United States",
                       style: TextStyles.bodyLarge,
                     ),
                   ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "(+33) 3489058521",
-                        style: TextStyles.bodyMedium,
-                      ),
-                      Text(
-                        "74381",
-                        style: TextStyles.bodyMedium,
-                      ),
-                    ],
+                  const Text(
+                    "(+33) 3489058521",
+                    style: TextStyles.bodyMedium,
                   ),
                 ],
               ),

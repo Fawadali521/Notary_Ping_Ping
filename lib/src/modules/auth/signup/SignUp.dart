@@ -1,10 +1,10 @@
 // ignore_for_file: file_names
 
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:notary_ping_notary/src/modules/auth/signin/SignIn.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/DashboardScreen.dart';
 import 'package:notary_ping_notary/src/states/signup/SignUpController.dart';
-import 'package:notary_ping_notary/src/utility/CustomDropDown.dart';
 import 'package:notary_ping_notary/src/utility/SocialButton.dart';
 
 import '../../../../index.dart';
@@ -61,31 +61,52 @@ class SignUp extends StatelessWidget {
           SizedBox(height: 16.h),
           Row(
             children: [
-              Obx(
-                () => CustomDropDown(
+              // Obx(
+              //   () => CustomDropDown(
+              //     textStyle: TextStyles.bodyMedium.copyWith(
+              //       color: Palette.blackColor,
+              //     ),
+              //     items: controller.state.slectCountryCode,
+              //     selectedVal: controller.state.countryCodee.value,
+              //     onChanged: (val) {
+              //       controller.changeSelectGender(val!);
+              //     },
+              //   ),
+              // ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Palette.bgTextFeildColor,
+                  borderRadius: BorderStyles.normal,
+                  border: Border.all(
+                    color: Palette.bgTextFeildColor,
+                  ),
+                ),
+                child: CountryCodePicker(
                   textStyle: TextStyles.bodyMedium.copyWith(
                     color: Palette.blackColor,
                   ),
-                  items: controller.state.slectCountryCode,
-                  selectedVal: controller.state.countryCodee.value,
-                  onChanged: (val) {
-                    controller.changeSelectCountryCode(val!);
-                  },
+                  dialogTextStyle: TextStyles.bodyMedium.copyWith(
+                    color: Palette.blackColor,
+                  ),
+                  dialogSize: Size(1.sw, 0.8.sh),
+                  padding: EdgeInsets.zero,
+                  // flagWidth: 24,
+                  onChanged: (element) => debugPrint(element.toLongString()),
+                  initialSelection: 'US',
                 ),
               ),
               SizedBox(width: 8.w),
               Expanded(
                 flex: 5,
                 child: CustomTextField(
-                  hintText: 'Phone number'.tr,
-                  onChange: (value) {
-                    // controller.state.confirmPassword = value;
-                  },
+                  hintText: 'Enter Phone number'.tr,
+                  onChange: (value) {},
                   keyboardType: TextInputType.number,
                 ),
               ),
             ],
           ),
+
           SizedBox(height: 16.h),
           CustomTextField(
             hintText: 'Enter your password'.tr,
@@ -95,91 +116,91 @@ class SignUp extends StatelessWidget {
             prefixIcon: passwordIcon,
             isuffixIconPassword: true,
           ),
-          SizedBox(height: 16.h),
-          LayoutBuilder(
-            builder: (context, constraints) => RawAutocomplete<String>(
-              optionsViewBuilder: (BuildContext context,
-                  AutocompleteOnSelected<String> onSelected,
-                  Iterable<String> options) {
-                return Align(
-                  alignment: Alignment.topLeft,
-                  child: Material(
-                    elevation: 4.0,
-                    child: SizedBox(
-                      // height: 200.0,
-                      width: constraints.biggest.width,
-                      child: ListView.builder(
-                        padding: const EdgeInsets.all(8.0),
-                        itemCount: options.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final String option = options.elementAt(index);
-                          return GestureDetector(
-                            onTap: () {
-                              onSelected(option);
-                            },
-                            child: ListTile(
-                              title: Text(option),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                );
-              },
-              initialValue: TextEditingValue(
-                text: controller.state.slectedCity.value,
-              ),
-              optionsBuilder: (textValue) {
-                if (textValue.text.isEmpty) {
-                  return List.empty();
-                } else {
-                  if (textValue.text.length == 1) {
-                    controller.state.slectedCity.value = "";
-                    return controller.state.selecteCity.where((element) =>
-                        element
-                            .toLowerCase()
-                            .contains(textValue.text.toLowerCase()));
-                  } else {
-                    controller.state.slectedCity.value = textValue.text;
-                    return controller.state.selecteCity.where((element) =>
-                        element
-                            .toLowerCase()
-                            .contains(textValue.text.toLowerCase()));
-                  }
-                }
-              },
-              fieldViewBuilder: (context, textEditingController, focusNode,
-                  onFieldSubmitted) {
-                return CustomTextField(
-                  focusnode: focusNode,
-                  onEditingComplete: onFieldSubmitted,
-                  controller: textEditingController,
-                  hintText: 'City'.tr,
-                  onChange: (value) {
-                    // controller.state.categoryName = value;
-                  },
-                  prefixIcon: cityIcon,
-                  suffixIcon: const Icon(
-                    Icons.keyboard_arrow_down_outlined,
-                    color: Palette.primaryColor,
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 16.h),
-          CustomTextField(
-            hintText: 'State'.tr,
-            onChange: (value) {},
-            prefixIcon: stateIcon,
-          ),
-          SizedBox(height: 16.h),
-          CustomTextField(
-            hintText: 'Zip code'.tr,
-            onChange: (value) {},
-            prefixIcon: zipcodeIcon,
-          ),
+          // SizedBox(height: 16.h),
+          // LayoutBuilder(
+          //   builder: (context, constraints) => RawAutocomplete<String>(
+          //     optionsViewBuilder: (BuildContext context,
+          //         AutocompleteOnSelected<String> onSelected,
+          //         Iterable<String> options) {
+          //       return Align(
+          //         alignment: Alignment.topLeft,
+          //         child: Material(
+          //           elevation: 4.0,
+          //           child: SizedBox(
+          //             // height: 200.0,
+          //             width: constraints.biggest.width,
+          //             child: ListView.builder(
+          //               padding: const EdgeInsets.all(8.0),
+          //               itemCount: options.length,
+          //               itemBuilder: (BuildContext context, int index) {
+          //                 final String option = options.elementAt(index);
+          //                 return GestureDetector(
+          //                   onTap: () {
+          //                     onSelected(option);
+          //                   },
+          //                   child: ListTile(
+          //                     title: Text(option),
+          //                   ),
+          //                 );
+          //               },
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //     initialValue: TextEditingValue(
+          //       text: controller.state.slectedCity.value,
+          //     ),
+          //     optionsBuilder: (textValue) {
+          //       if (textValue.text.isEmpty) {
+          //         return List.empty();
+          //       } else {
+          //         if (textValue.text.length == 1) {
+          //           controller.state.slectedCity.value = "";
+          //           return controller.state.selecteCity.where((element) =>
+          //               element
+          //                   .toLowerCase()
+          //                   .contains(textValue.text.toLowerCase()));
+          //         } else {
+          //           controller.state.slectedCity.value = textValue.text;
+          //           return controller.state.selecteCity.where((element) =>
+          //               element
+          //                   .toLowerCase()
+          //                   .contains(textValue.text.toLowerCase()));
+          //         }
+          //       }
+          //     },
+          //     fieldViewBuilder: (context, textEditingController, focusNode,
+          //         onFieldSubmitted) {
+          //       return CustomTextField(
+          //         focusnode: focusNode,
+          //         onEditingComplete: onFieldSubmitted,
+          //         controller: textEditingController,
+          //         hintText: 'City'.tr,
+          //         onChange: (value) {
+          //           // controller.state.categoryName = value;
+          //         },
+          //         prefixIcon: cityIcon,
+          //         suffixIcon: const Icon(
+          //           Icons.keyboard_arrow_down_outlined,
+          //           color: Palette.primaryColor,
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
+          // SizedBox(height: 16.h),
+          // CustomTextField(
+          //   hintText: 'State'.tr,
+          //   onChange: (value) {},
+          //   prefixIcon: stateIcon,
+          // ),
+          // SizedBox(height: 16.h),
+          // CustomTextField(
+          //   hintText: 'Zip code'.tr,
+          //   onChange: (value) {},
+          //   prefixIcon: zipcodeIcon,
+          // ),
 
           Padding(
             padding: EdgeInsets.only(top: 24.h),

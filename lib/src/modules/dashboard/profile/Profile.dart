@@ -8,7 +8,7 @@ import 'package:notary_ping_notary/src/modules/dashboard/profile/EditProfile.dar
 import 'package:notary_ping_notary/src/modules/dashboard/profile/PrivacyPolicy.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/TermAndCondition.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/address_managment/AddressBook.dart';
-import 'package:notary_ping_notary/src/modules/dashboard/profile/edit_notary/EditNotaryContact.dart';
+import 'package:notary_ping_notary/src/modules/dashboard/profile/edit_notary/EditNotaryProfessional.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/subscription/MySubscription.dart';
 import 'package:notary_ping_notary/src/modules/dashboard/profile/utility/CustomProfileItem.dart';
 import 'package:notary_ping_notary/src/states/profile/ProfileController.dart';
@@ -80,12 +80,12 @@ class Profile extends StatelessWidget {
           CustomProfileItem(
             title: "Edit profile",
             icon: editIcon,
-            onTap: () => Get.to(() => EditProfile()),
+            onTap: () => Get.to(() => const EditProfile()),
           ),
           CustomProfileItem(
             title: "Edit notary profile",
             icon: editIcon,
-            onTap: () => Get.to(() => EditNotaryContact()),
+            onTap: () => Get.to(() => EditNotaryProfessional()),
           ),
           CustomProfileItem(
             title: "Address book",

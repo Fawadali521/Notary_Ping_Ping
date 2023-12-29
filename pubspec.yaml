@@ -46,6 +46,8 @@ dependencies:
   http: ^1.1.2
   uuid: ^4.2.2
   emoji_picker_flutter: ^1.0.8
+  country_code_picker: ^3.0.0
+  logger: ^2.0.2+1
 
 
 

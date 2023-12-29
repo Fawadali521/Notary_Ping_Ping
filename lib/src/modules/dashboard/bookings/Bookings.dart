@@ -198,7 +198,7 @@ class _BookingsState extends State<Bookings> {
                             children: [
                               Expanded(
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                                  padding: EdgeInsets.symmetric(vertical: 8.h),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
                                     color: Palette.whiteColor,
@@ -218,7 +218,7 @@ class _BookingsState extends State<Bookings> {
                               SizedBox(width: 16.w),
                               Expanded(
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                                  padding: EdgeInsets.symmetric(vertical: 8.h),
                                   decoration: BoxDecoration(
                                     color: Palette.primaryColor,
                                     borderRadius: BorderRadius.circular(30),
@@ -318,7 +318,7 @@ class _BookingsState extends State<Bookings> {
                             children: [
                               Expanded(
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                                  padding: EdgeInsets.symmetric(vertical: 8.h),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
                                     color: Palette.whiteColor,
@@ -338,7 +338,7 @@ class _BookingsState extends State<Bookings> {
                               SizedBox(width: 16.w),
                               Expanded(
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                                  padding: EdgeInsets.symmetric(vertical: 8.h),
                                   decoration: BoxDecoration(
                                     color: Palette.primaryColor,
                                     borderRadius: BorderRadius.circular(30),

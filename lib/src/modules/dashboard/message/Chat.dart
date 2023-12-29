@@ -746,7 +746,8 @@ class _ChatState extends State<Chat> {
                 backGroundColor: Palette.whiteColor,
                 titleColor: Palette.primaryColor,
               ),
-            )
+            ),
+            const SafeArea(top: false, child: SizedBox()),
           ],
         );
       },
