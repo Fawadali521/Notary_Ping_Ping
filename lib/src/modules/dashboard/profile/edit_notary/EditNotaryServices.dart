@@ -15,8 +15,10 @@ class EditNotaryServices extends StatefulWidget {
 class _EditNotaryServicesState extends State<EditNotaryServices> {
   final ProfileController controller = Get.find<ProfileController>();
   int selectIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    // Scaffold widget for the screen
     return Scaffold(
       backgroundColor: Palette.bgColor,
       appBar: CustomAppBar(
@@ -26,10 +28,12 @@ class _EditNotaryServicesState extends State<EditNotaryServices> {
       ),
       body: Stack(
         children: [
+          // ListView widget for the main content
           ListView(
             shrinkWrap: true,
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             children: [
+              // Text widget for the section title
               Text(
                 "Add services".tr,
                 style: TextStyles.titleLarge,
@@ -47,6 +51,7 @@ class _EditNotaryServicesState extends State<EditNotaryServices> {
                       });
                     },
                     child: Container(
+                      // Container widget for each service item
                       padding:
                           EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                       decoration: BoxDecoration(
@@ -58,6 +63,7 @@ class _EditNotaryServicesState extends State<EditNotaryServices> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          // Image widget for the service icon
                           Image.asset(
                             Infos().notaryServicesImg[index],
                             height: 20,
@@ -68,6 +74,7 @@ class _EditNotaryServicesState extends State<EditNotaryServices> {
                             fit: BoxFit.contain,
                           ),
                           SizedBox(width: 8.w),
+                          // Text widget for the service name
                           Text(
                             Infos().notaryServices[index],
                             style: TextStyles.bodyMedium.copyWith(
@@ -91,6 +98,7 @@ class _EditNotaryServicesState extends State<EditNotaryServices> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // SubmitButton widget for updating the profile
                   SubmitButton(
                     title: 'Update'.tr,
                     onTap: () => Get.offAll(() => const Dashboard()),

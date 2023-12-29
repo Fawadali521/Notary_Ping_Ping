@@ -9,9 +9,12 @@ import '../../../../../index.dart';
 
 class MySubscription extends StatelessWidget {
   MySubscription({super.key});
+
   final ProfileController controller = Get.find<ProfileController>();
+
   @override
   Widget build(BuildContext context) {
+    // Scaffold widget for the entire screen
     return Scaffold(
       backgroundColor: Palette.whiteColor,
       appBar: CustomAppBar(
@@ -23,15 +26,18 @@ class MySubscription extends StatelessWidget {
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         children: [
+          // Title for the subscription section
           Text(
             "Get Started Today".tr,
             style: TextStyles.titleLarge,
           ),
+          // Description for the subscription section
           Text(
             "Choose the right plan for you".tr,
             style: TextStyles.bodySmall,
           ),
           SizedBox(height: 12.h),
+          // Subscription card widget with monthly plan
           const SubscriptionCard(
             price: "\$100/",
             time: "month",
@@ -39,12 +45,14 @@ class MySubscription extends StatelessWidget {
             description:
                 "Unlock premium features with our monthly subscription",
           ),
+          // Subscription card widget with 6-month plan
           const SubscriptionCard(
             price: "\$499/",
             time: "6month",
             description:
                 "Unlock premium features with our monthly subscription",
           ),
+          // Subscription card widget with yearly plan
           const SubscriptionCard(
             price: "\$999/",
             time: "yearly",
@@ -52,6 +60,7 @@ class MySubscription extends StatelessWidget {
                 "Upgrade to annual excellence seamless notaryping with yearly subscription",
           ),
           SizedBox(height: 16.h),
+          // Card widget for current plan details
           Card(
             margin: EdgeInsets.zero,
             elevation: 2,
@@ -65,16 +74,19 @@ class MySubscription extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Title for current plan
                       Text(
                         "Current plan".tr,
                         style: TextStyles.titleLarge,
                       ),
+                      // Description for current plan
                       Text(
                         "Free plan".tr,
                         style: TextStyles.bodyMedium.copyWith(
                           color: Palette.blackColor,
                         ),
                       ),
+                      // Expiry date for current plan
                       Text(
                         "Expires on 12 may 2023".tr,
                         style: TextStyles.titleMedium.copyWith(
@@ -87,6 +99,7 @@ class MySubscription extends StatelessWidget {
                   Stack(
                     alignment: Alignment.center,
                     children: [
+                      // Circular progress indicator for plan completion
                       CircularPercentIndicator(
                         radius: 60.0,
                         lineWidth: 12.0,
@@ -97,10 +110,12 @@ class MySubscription extends StatelessWidget {
                       ),
                       const Column(
                         children: [
+                          // Number of days left in the plan
                           Text(
                             "2",
                             style: TextStyles.headlineMedium,
                           ),
+                          // Label for days left
                           Text(
                             "Days left",
                             style: TextStyles.bodySmall,
@@ -114,6 +129,7 @@ class MySubscription extends StatelessWidget {
             ),
           ),
           SizedBox(height: 24.h),
+          // Button to navigate to payment screen
           SubmitButton(
             title: 'Get started'.tr,
             onTap: () => Get.to(() => const PayNow()),

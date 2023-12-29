@@ -19,7 +19,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   int currentIndex = 0;
   final PageController pageController = PageController(initialPage: 0);
-  // @override
+// @override
   // void initState() {
   //   pageController = PageController(
   //     initialPage: currentIndex,
@@ -46,10 +46,10 @@ class _DashboardState extends State<Dashboard> {
             });
           },
           children: [
-            const Home(),
-            const Bookings(),
-            const Message(),
-            Profile(),
+            const Home(), // Home screen
+            const Bookings(), // Bookings screen
+            const Message(), // Message screen
+            Profile(), // Profile screen
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -74,28 +74,28 @@ class _DashboardState extends State<Dashboard> {
                 AssetImage(homeIcon),
                 size: 24,
               ),
-              label: 'Home'.tr,
+              label: 'Home'.tr, // Home label
             ),
             BottomNavigationBarItem(
               icon: const ImageIcon(
                 AssetImage(bookingsIcon),
                 size: 24,
               ),
-              label: 'Bookings'.tr,
+              label: 'Bookings'.tr, // Bookings label
             ),
             BottomNavigationBarItem(
               icon: const ImageIcon(
                 AssetImage(messageIcon),
                 size: 24,
               ),
-              label: 'Message'.tr,
+              label: 'Message'.tr, // Message label
             ),
             BottomNavigationBarItem(
               icon: const ImageIcon(
                 AssetImage(userIcon),
                 size: 24,
               ),
-              label: 'Profile'.tr,
+              label: 'Profile'.tr, // Profile label
             ),
           ],
         ));

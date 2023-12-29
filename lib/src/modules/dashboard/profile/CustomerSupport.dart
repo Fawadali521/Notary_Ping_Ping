@@ -27,6 +27,7 @@ class _CustomerSupportState extends State<CustomerSupport> {
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         children: [
+          // Chat with support ListTile
           Container(
             margin: EdgeInsets.only(bottom: 20.h),
             decoration: BoxDecoration(
@@ -71,6 +72,7 @@ class _CustomerSupportState extends State<CustomerSupport> {
               ),
             ),
           ),
+          // Email ListTile
           Container(
             margin: EdgeInsets.only(bottom: 20.h),
             decoration: BoxDecoration(
@@ -115,11 +117,13 @@ class _CustomerSupportState extends State<CustomerSupport> {
               ),
             ),
           ),
+          // FAQ section title
           const Text(
             "FAQ",
             style: TextStyles.titleSmall,
           ),
           SizedBox(height: 16.h),
+          // FAQ list
           ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -143,6 +147,7 @@ class _CustomerSupportState extends State<CustomerSupport> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // FAQ question and answer
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -164,6 +169,7 @@ class _CustomerSupportState extends State<CustomerSupport> {
                                 ),
                               ],
                             ),
+                            // Show answer if isShowAnswer is true
                             controller.state.filteredFAQS[index].isShowAnswer!
                                 ? Padding(
                                     padding: EdgeInsets.only(top: 10.h),

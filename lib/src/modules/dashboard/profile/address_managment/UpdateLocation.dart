@@ -27,6 +27,7 @@ class _UpdateLocationState extends State<UpdateLocation> {
 
   @override
   void initState() {
+    // Initialize the text controllers with default values
     addressController.text = "15205 North Kierland Blvd. Suite 100";
     nameController.text = "Fawad";
     phoneController.text = "3345233543";
@@ -43,22 +44,22 @@ class _UpdateLocationState extends State<UpdateLocation> {
       backgroundColor: Palette.whiteColor,
       appBar: CustomAppBar(
         color: Palette.whiteColor,
-        title: 'Update Address'.tr,
-        isBack: true,
+        title: 'Update Address'.tr, // Set the title of the app bar
+        isBack: true, // Show the back button in the app bar
       ),
       body: ListView(
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         children: [
           Text(
-            "Address information".tr,
+            "Address information".tr, // Display the section title
             style: TextStyles.titleLarge,
           ),
           SizedBox(height: 12.h),
           CustomTextField(
-            hintText: 'Enter your full name'.tr,
-            controller: nameController,
-            prefixIcon: userIcon,
+            hintText: 'Enter your full name'.tr, // Display the hint text
+            controller: nameController, // Bind the text controller
+            prefixIcon: userIcon, // Display the prefix icon
           ),
           SizedBox(height: 16.h),
           Row(
@@ -135,8 +136,8 @@ class _UpdateLocationState extends State<UpdateLocation> {
           ),
           SizedBox(height: 80.h),
           SubmitButton(
-            title: 'Update Address'.tr,
-            onTap: () => Get.to(() => const Dashboard()),
+            title: 'Update Address'.tr, // Display the button title
+            onTap: () => Get.to(() => const Dashboard()), // Navigate to the Dashboard screen on button tap
           ),
           SizedBox(height: 24.h),
         ],

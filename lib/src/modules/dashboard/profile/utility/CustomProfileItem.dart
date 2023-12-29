@@ -3,11 +3,11 @@
 import '../../../../../index.dart';
 
 class CustomProfileItem extends StatelessWidget {
-  final String icon;
-  final String title;
-  final VoidCallback onTap;
-  final Color? backgroundColor;
-  final Color? iconColor;
+  final String icon; // The path to the icon asset.
+  final String title; // The title of the profile item.
+  final VoidCallback onTap; // The callback function when the item is tapped.
+  final Color? backgroundColor; // The background color of the item.
+  final Color? iconColor; // The color of the icon.
 
   const CustomProfileItem({
     super.key,
@@ -40,12 +40,12 @@ class CustomProfileItem extends StatelessWidget {
             ),
             SizedBox(width: 12.w),
             Text(
-              title.tr,
+              title.tr, // Translated title text.
               style: TextStyles.bodyLarge,
             ),
             const Spacer(),
             Image.asset(
-              arrowForwardIosIcon,
+              arrowForwardIosIcon, // The path to the forward arrow icon asset.
               height: 16,
               width: 16,
               color: iconColor ?? Palette.greyTextColor,

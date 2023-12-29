@@ -3,10 +3,11 @@
 import '../../../../../index.dart';
 
 class SubscriptionCard extends StatelessWidget {
-  final String price;
-  final String time;
-  final String description;
-  final bool isSelect;
+  final String price; // The price of the subscription
+  final String time; // The duration of the subscription
+  final String description; // The description of the subscription
+  final bool isSelect; // Indicates if the subscription is selected or not
+
   const SubscriptionCard({
     super.key,
     required this.price,
@@ -26,6 +27,7 @@ class SubscriptionCard extends StatelessWidget {
       ),
       child: Column(
         children: [
+          // Widget to display the price and time of the subscription
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -44,6 +46,7 @@ class SubscriptionCard extends StatelessWidget {
               ),
             ],
           ),
+          // Widget to display the description of the subscription
           Padding(
             padding: EdgeInsets.symmetric(vertical: 8.h),
             child: Text(
@@ -53,13 +56,14 @@ class SubscriptionCard extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
+          // Widget for the submit button to select the subscription plan
           SubmitButton(
             title: 'Select plan'.tr,
             onTap: () {},
             backGroundColor:
                 isSelect ? Palette.primaryColor : Palette.whiteColor,
             titleColor: isSelect ? Palette.whiteColor : Palette.blackColor,
-            boderColor: isSelect ? Palette.primaryColor : Palette.whiteColor,                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+            boderColor: isSelect ? Palette.primaryColor : Palette.whiteColor,
           ),
         ],
       ),

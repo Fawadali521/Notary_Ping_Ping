@@ -29,26 +29,34 @@ class _AddPaymentState extends State<AddPayment> {
           ListView(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             children: [
+              // Title
               Text(
                 "Add payment method".tr,
                 style: TextStyles.titleLarge,
               ),
 
+              // Card Image
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.h),
                 child: Image.asset(
                   showCardImage,
                 ),
               ),
+
+              // Card Holder Name
               CustomTextField(
                 hintText: "Card holder name".tr,
               ),
+
+              // Card Number
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 child: CustomTextField(
                   hintText: "Card number".tr,
                 ),
               ),
+
+              // Expiration Date and CVV
               Row(
                 children: [
                   Expanded(
@@ -64,6 +72,8 @@ class _AddPaymentState extends State<AddPayment> {
                   ),
                 ],
               ),
+
+              // Amount
               Padding(
                 padding: EdgeInsets.only(top: 12.h, bottom: 24.h),
                 child: CustomTextField(
@@ -74,6 +84,8 @@ class _AddPaymentState extends State<AddPayment> {
               // Add more languages as needed
             ],
           ),
+
+          // Submit Button
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -96,6 +108,7 @@ class _AddPaymentState extends State<AddPayment> {
     );
   }
 
+  // Show Confirmation Subscription Alert Dialog
   showConfirmationSubscriptionAlert(BuildContext context) {
     showDialog(
       context: context,
@@ -113,6 +126,7 @@ class _AddPaymentState extends State<AddPayment> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              // Confirmation Icon
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 32.h),
                 child: const ClipOval(
@@ -124,10 +138,14 @@ class _AddPaymentState extends State<AddPayment> {
                   ),
                 ),
               ),
+
+              // Confirmation Title
               Text(
                 "Payment confirm".tr,
                 style: TextStyles.headlineLarge,
               ),
+
+              // Confirmation Message
               Padding(
                 padding: EdgeInsets.only(top: 12.h, left: 32.w, right: 32.w),
                 child: Text(
@@ -137,6 +155,8 @@ class _AddPaymentState extends State<AddPayment> {
                   textAlign: TextAlign.center,
                 ),
               ),
+
+              // Back to Home Button
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
                 child: Row(

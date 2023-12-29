@@ -20,6 +20,7 @@ class TermAndCondition extends StatelessWidget {
         shrinkWrap: true,
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         children: [
+          // Displaying the condition icon and title
           Row(
             children: [
               Image.asset(
@@ -32,6 +33,7 @@ class TermAndCondition extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Displaying the title of the terms and conditions
                   Text(
                     "Terms and conditions".tr,
                     style: TextStyles.headlineSmall.copyWith(
@@ -39,12 +41,14 @@ class TermAndCondition extends StatelessWidget {
                       fontSize: 18,
                     ),
                   ),
+                  // Displaying the update date
                   Text("${"Update".tr}${date.format(DateTime.now())}",
                       style: TextStyles.bodyMedium),
                 ],
               )
             ],
           ),
+          // Adding padding and displaying the main title
           Padding(
             padding: const EdgeInsets.only(bottom: 10, top: 24),
             child: Text(
@@ -52,6 +56,7 @@ class TermAndCondition extends StatelessWidget {
               style: TextStyles.titleLarge,
             ),
           ),
+          // Displaying the content of the terms and conditions
           Text(
             "15.2 Your privacy is important to us. To better protect your privacy, we are providing this notice explaining our policy with regards to the information you share with us. This privacy policy relates to the information we collect, online from Application, received through the email, by fax or telephone, or in person or in any other way and retain and use for the purpose of providing you services. If you do not agree to the terms in this Policy, we kindly ask you not to use these portals and/or sign the contract document."
                 .tr,

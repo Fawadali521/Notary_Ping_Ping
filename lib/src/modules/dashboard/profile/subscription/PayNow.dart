@@ -29,6 +29,7 @@ class _PayNowState extends State<PayNow> {
           ListView(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             children: [
+              // Add card widget
               Text(
                 "Add card".tr,
                 style: TextStyles.titleLarge,
@@ -44,6 +45,7 @@ class _PayNowState extends State<PayNow> {
                 ),
                 child: Row(
                   children: [
+                    // Visa Card option
                     ClipOval(
                       child: Image.asset(
                         visacardIcon,
@@ -82,6 +84,7 @@ class _PayNowState extends State<PayNow> {
                 ),
                 child: Row(
                   children: [
+                    // Master Card option
                     ClipOval(
                       child: Image.asset(
                         mastercardIcon,
@@ -120,6 +123,7 @@ class _PayNowState extends State<PayNow> {
                 ),
                 child: Row(
                   children: [
+                    // Paypal option
                     ClipOval(
                       child: Image.asset(
                         paypalcardIcon,
@@ -223,6 +227,7 @@ class _PayNowState extends State<PayNow> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Submit button widget
                   SubmitButton(
                       onTap: () => Get.to(() => const AddPayment()),
                       title: "Apply".tr),

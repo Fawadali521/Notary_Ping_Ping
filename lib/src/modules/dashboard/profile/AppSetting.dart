@@ -27,11 +27,13 @@ class _AppSettingState extends State<AppSetting> {
       ),
       body: Stack(
         children: [
+          // Widget to display the list of settings
           Obx(
             () => ListView(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               children: [
                 const SizedBox(height: 20),
+                // Widget for the "Notification" setting
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -62,6 +64,7 @@ class _AppSettingState extends State<AppSetting> {
                   padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: const CustomDivider(),
                 ),
+                // Widget for the "Availability" setting
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -92,6 +95,7 @@ class _AppSettingState extends State<AppSetting> {
                   padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: const CustomDivider(),
                 ),
+                // Widget for the list of languages
                 ListView.builder(
                   itemCount: controller.state.languages.length,
                   shrinkWrap: true,
@@ -112,6 +116,7 @@ class _AppSettingState extends State<AppSetting> {
               ],
             ),
           ),
+          // Widget for the submit button
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
